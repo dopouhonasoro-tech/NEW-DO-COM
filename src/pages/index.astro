@@ -1,0 +1,374 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout current="accueil" navTheme="dark">
+
+  <!-- ==================== HERO VIDEO + PARALLAXE ==================== -->
+  <section class="relative min-h-[94vh] flex items-end overflow-hidden -mt-16 md:-mt-20 pt-16 md:pt-20" data-parallax-scene>
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="/media/logo.webp"
+    >
+      <source src="/media/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+
+    <!-- Orbes de profondeur -->
+    <div class="orb-field" aria-hidden="true">
+      <div class="orb orb-emeraude orb-a w-[38rem] h-[38rem] -top-40 -right-40"></div>
+      <div class="orb orb-deep orb-b w-[28rem] h-[28rem] bottom-0 -left-32"></div>
+    </div>
+
+    <div class="container-app relative z-10 pb-16 md:pb-24 pt-10">
+      <div class="max-w-5xl">
+        <div class="inline-flex items-center gap-2.5 glass-dark !rounded-full px-4 py-2 mb-8 animate-in" style="animation-delay: 80ms" data-parallax-layer="6">
+          <span class="w-2 h-2 rounded-full bg-[color:var(--color-emeraude-glow)] animate-pulse"></span>
+          <span class="text-xs tracking-wide text-[color:var(--color-ivoire)]/85">Réponse humaine sous 24 h · Abidjan → Afrique & Europe francophone</span>
+        </div>
+
+        <h1 class="h-mega mb-8 animate-in" style="animation-delay: 220ms" data-parallax-layer="12">
+          Voir plus loin.<br/>
+          <span class="serif-em text-[color:var(--color-emeraude-glow)]">Vendre plus, dès ce trimestre.</span>
+        </h1>
+
+        <p class="text-lg md:text-xl max-w-2xl leading-relaxed text-[color:var(--color-ivoire)]/85 mb-10 animate-in" style="animation-delay: 380ms" data-parallax-layer="18">
+          La plupart des agences vous vendent de la visibilité. Nous, on s'engage sur ce qui vous fait vivre : <span class="serif-em text-[color:var(--color-emeraude-glow)]">des contacts, des ventes, des chiffres réels</span> — publiés dans votre rapport chaque mois.
+        </p>
+
+        <div class="flex flex-wrap gap-4 animate-in" style="animation-delay: 520ms" data-parallax-layer="24">
+          <a href="/contact/" class="btn-emeraude glow-ring" data-magnetic>
+            Réserver un diagnostic gratuit
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="/services/" class="btn-line-light" data-magnetic>Voir nos 3 expertises</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-[color:var(--color-ivoire)]/60 text-xs tracking-widest uppercase hidden md:flex flex-col items-center gap-2">
+      <span>Défiler</span>
+      <span class="w-px h-8 bg-[color:var(--color-ivoire)]/40 relative overflow-hidden">
+        <span class="absolute top-0 left-0 w-full h-1/2 bg-[color:var(--color-emeraude-glow)] animate-pulse"></span>
+      </span>
+    </div>
+  </section>
+
+  <!-- ==================== STATS BAND (compteurs) ==================== -->
+  <section class="sec-dark border-y hl-dark relative overflow-hidden">
+    <div class="container-app py-12 grid grid-cols-2 md:grid-cols-4 gap-8" data-reveal-stagger>
+      <div>
+        <div class="font-display text-4xl md:text-5xl leading-none mb-2"><span data-count="3">0</span></div>
+        <div class="text-xs text-[color:var(--color-gris-cool)] uppercase tracking-widest">Expertises, aucune dispersion</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl md:text-5xl leading-none mb-2"><span data-count="5">0</span><span class="text-emeraude-glow">+</span></div>
+        <div class="text-xs text-[color:var(--color-gris-cool)] uppercase tracking-widest">Structures accompagnées</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl md:text-5xl leading-none mb-2"><span data-count="24">0</span><span class="text-emeraude-glow">h</span></div>
+        <div class="text-xs text-[color:var(--color-gris-cool)] uppercase tracking-widest">Un humain vous répond</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl md:text-5xl leading-none mb-2"><span data-count="100">0</span><span class="text-emeraude-glow">%</span></div>
+        <div class="text-xs text-[color:var(--color-gris-cool)] uppercase tracking-widest">Chiffres réels dans vos rapports</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LE VRAI PROBLÈME ==================== -->
+  <section class="sec-light py-24 md:py-36 relative overflow-hidden">
+    <div class="container-app">
+      <div class="grid md:grid-cols-12 gap-8 mb-16" data-reveal>
+        <div class="md:col-span-4">
+          <div class="eyebrow text-emeraude mb-4">Le vrai problème</div>
+        </div>
+        <div class="md:col-span-8">
+          <h2 class="h-xl text-[color:var(--color-encre)]">
+            Vous avez déjà payé<br/>
+            pour du marketing qui<br/>
+            <span class="serif-em text-emeraude">n'a rien rapporté.</span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6" data-reveal-stagger>
+        <div class="card-light p-8" data-tilt>
+          <div class="font-display text-5xl text-[color:var(--color-line-light)] mb-6">01</div>
+          <div class="font-medium text-lg mb-3 text-[color:var(--color-encre)]">Des posts, mais pas de clients</div>
+          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">On vous a vendu des publications, des likes, de la "visibilité". Votre chiffre d'affaires, lui, n'a pas bougé. Ce n'était pas du marketing — c'était de l'animation.</p>
+        </div>
+        <div class="card-light p-8" data-tilt>
+          <div class="font-display text-5xl text-[color:var(--color-line-light)] mb-6">02</div>
+          <div class="font-medium text-lg mb-3 text-[color:var(--color-encre)]">Des rapports incompréhensibles</div>
+          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Impressions, reach, engagement… mais jamais la seule ligne qui compte : combien ça a coûté, combien ça a rapporté. Si votre agence ne vous la montre pas, c'est qu'elle n'ose pas.</p>
+        </div>
+        <div class="card-light p-8" data-tilt>
+          <div class="font-display text-5xl text-[color:var(--color-line-light)] mb-6">03</div>
+          <div class="font-medium text-lg mb-3 text-[color:var(--color-encre)]">Une agence qui dit oui à tout</div>
+          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Site, logo, réseaux, flyers, événementiel… la même équipe qui fait "tout" ne peut être excellente nulle part. Vous payez le prix d'un spécialiste pour un résultat de généraliste.</p>
+        </div>
+      </div>
+
+      <div class="mt-14 text-center" data-reveal>
+        <p class="text-lg text-[color:var(--color-gris-warm)] max-w-2xl mx-auto">
+          Si vous vous reconnaissez dans une seule de ces situations,<br class="hidden md:block"/>
+          <span class="serif-em text-emeraude text-xl">les 30 prochaines secondes de lecture vont vous intéresser.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3 PILIERS (dark + tilt) ==================== -->
+  <section class="sec-dark py-24 md:py-36 relative overflow-hidden">
+    <div class="orb-field" aria-hidden="true">
+      <div class="orb orb-deep orb-a w-[32rem] h-[32rem] top-20 -right-40"></div>
+    </div>
+
+    <div class="container-app relative z-10">
+      <div class="grid md:grid-cols-12 gap-8 mb-16 md:mb-20" data-reveal>
+        <div class="md:col-span-4">
+          <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-4">Notre réponse</div>
+        </div>
+        <div class="md:col-span-8">
+          <h2 class="h-xl">
+            Trois expertises.<br/>
+            <span class="serif-em text-[color:var(--color-emeraude-glow)]">Zéro dispersion.</span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6" data-reveal-stagger>
+        <a href="/services/#publicite" class="card-dark p-8 md:p-10 group block" data-tilt>
+          <div class="text-sm font-mono text-[color:var(--color-emeraude-glow)] mb-6">01 / Growth</div>
+          <h3 class="font-display text-2xl md:text-[1.7rem] leading-tight mb-4">Publicité digitale <span class="serif-em">& growth</span></h3>
+          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed mb-8">
+            Meta, Google, TikTok Ads. Chaque franc dépensé se justifie par un résultat mesuré : leads, ventes, coût d'acquisition. Pilotage quotidien, rapport mensuel réel.
+          </p>
+          <span class="inline-flex items-center gap-2 text-[color:var(--color-emeraude-glow)] text-sm font-medium group-hover:gap-3.5 transition-all">
+            Découvrir <span aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a href="/services/#audit" class="card-dark p-8 md:p-10 group block" data-tilt>
+          <div class="text-sm font-mono text-[color:var(--color-emeraude-glow)] mb-6">02 / Stratégie</div>
+          <h3 class="font-display text-2xl md:text-[1.7rem] leading-tight mb-4">Audit <span class="serif-em">& conseil stratégique</span></h3>
+          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed mb-8">
+            Un regard extérieur structuré sur votre funnel, votre positionnement, vos dépenses. Livrable clair, priorités classées. Pas de PowerPoint pour PowerPoint.
+          </p>
+          <span class="inline-flex items-center gap-2 text-[color:var(--color-emeraude-glow)] text-sm font-medium group-hover:gap-3.5 transition-all">
+            Découvrir <span aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a href="/services/#site" class="card-dark p-8 md:p-10 group block" data-tilt>
+          <div class="text-sm font-mono text-[color:var(--color-emeraude-glow)] mb-6">03 / Site</div>
+          <h3 class="font-display text-2xl md:text-[1.7rem] leading-tight mb-4">Création <span class="serif-em">de site web</span></h3>
+          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed mb-8">
+            Sites rapides, mesurables, pensés conversion — pas des vitrines décoratives. Stack moderne (Astro, Netlify), chaque page a un objectif et un tracking.
+          </p>
+          <span class="inline-flex items-center gap-2 text-[color:var(--color-emeraude-glow)] text-sm font-medium group-hover:gap-3.5 transition-all">
+            Découvrir <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== COMPARATIF : POURQUOI NOUS ==================== -->
+  <section class="sec-light py-24 md:py-36">
+    <div class="container-app">
+      <div class="max-w-3xl mb-16" data-reveal>
+        <div class="eyebrow text-emeraude mb-4">La différence</div>
+        <h2 class="h-xl text-[color:var(--color-encre)]">
+          Ce que vous achetez,<br/>
+          <span class="serif-em text-emeraude">vraiment.</span>
+        </h2>
+      </div>
+
+      <div class="rounded-2xl border hl-light overflow-hidden" data-reveal>
+        <!-- header (desktop) -->
+        <div class="vs-row border-b hl-light bg-[color:var(--color-ivoire-soft)] hidden md:grid">
+          <div class="p-5 md:p-6"></div>
+          <div class="p-5 md:p-6 text-sm font-medium text-[color:var(--color-gris-warm)]">Une agence classique</div>
+          <div class="p-5 md:p-6 text-sm font-semibold text-emeraude flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[color:var(--color-emeraude)]"></span> DO COM
+          </div>
+        </div>
+
+        {[
+          {
+            k: "Ce qu'on vous vend",
+            a: "Des posts, des likes, de la « visibilité »",
+            b: "Des contacts et des ventes, mesurés chaque mois",
+          },
+          {
+            k: "Le rapport mensuel",
+            a: "Des impressions et du reach, jamais le coût par résultat",
+            b: "Dépense, résultats, coût par résultat — les chiffres réels",
+          },
+          {
+            k: "Le périmètre",
+            a: "« On fait tout » — donc rien d'excellent",
+            b: "3 expertises seulement, travaillées à fond",
+          },
+          {
+            k: "Quand ça ne marche pas",
+            a: "On change de sujet, on relance un devis",
+            b: "On vous le dit dans le rapport, avec un plan de correction — ou un arrêt",
+          },
+          {
+            k: "L'engagement",
+            a: "Reconduction tacite, mensualités qui s'installent",
+            b: "Vous re-signez uniquement si les chiffres le justifient",
+          },
+        ].map((row, i) => (
+          <div class:list={["vs-row", i < 4 && "border-b hl-light"]}>
+            <div class="p-5 md:p-6 text-sm font-semibold text-[color:var(--color-encre)] bg-[color:var(--color-ivoire-soft)] md:bg-transparent">{row.k}</div>
+            <div class="p-5 md:p-6 text-sm text-[color:var(--color-gris-warm)] leading-relaxed">
+              <span class="md:hidden block text-[10px] uppercase tracking-[0.2em] mb-1.5 text-[color:var(--color-gris-cool)]">Agence classique</span>
+              {row.a}
+            </div>
+            <div class="p-5 md:p-6 text-sm text-[color:var(--color-encre)] leading-relaxed font-medium bg-[color:var(--color-emeraude)]/[0.04]">
+              <span class="md:hidden block text-[10px] uppercase tracking-[0.2em] mb-1.5 text-emeraude">DO COM</span>
+              {row.b}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-10 text-center text-[color:var(--color-gris-warm)]" data-reveal>
+        Nous ne connaissons aucune autre agence sur nos marchés qui accepte de mettre <span class="serif-em text-emeraude">son coût par résultat</span> noir sur blanc dans le rapport client. C'est notre pari — et votre garantie.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== POSITIONNEMENT ==================== -->
+  <section class="sec-dark py-24 md:py-36 relative overflow-hidden">
+    <div class="orb-field" aria-hidden="true">
+      <div class="orb orb-emeraude orb-b w-[26rem] h-[26rem] -bottom-20 -left-24"></div>
+    </div>
+    <div class="container-app grid md:grid-cols-12 gap-16 items-start relative z-10">
+      <div class="md:col-span-5" data-reveal="left">
+        <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-6">Positionnement</div>
+        <h2 class="h-xl mb-8">
+          Nous avons choisi<br/>
+          de ne <span class="serif-em text-[color:var(--color-emeraude-glow)]">pas</span> tout faire.
+        </h2>
+      </div>
+      <div class="md:col-span-7 space-y-6 text-lg leading-relaxed text-[color:var(--color-ivoire)]/85" data-reveal>
+        <p>
+          La plupart des agences vendent une dizaine de services parce que refuser un client fait peur. Résultat : personne ne devient vraiment excellent nulle part, et le client paye pour de la moyenne.
+        </p>
+        <p>
+          DO COM s'est recentrée sur trois expertises — celles où nous avons un vrai avantage opérationnel : accès direct aux plateformes Meta / Google / TikTok, méthodologie de conseil éprouvée, stack technique moderne pour livrer des sites rapides et rentables à opérer.
+        </p>
+        <p class="text-[color:var(--color-ivoire)]">
+          Si votre besoin sort de ces trois piliers, <span class="serif-em text-[color:var(--color-emeraude-glow)]">nous vous le dirons</span> — et nous vous orienterons vers quelqu'un qui saura vraiment le faire.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CLIENTS MARQUEE ==================== -->
+  <section class="sec-light py-16 border-t hl-light">
+    <div class="container-app mb-10">
+      <div class="eyebrow text-emeraude text-center">Ils nous ont fait confiance</div>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track font-display text-3xl md:text-5xl text-[color:var(--color-encre)]/70">
+        <span>STRANINVEST</span><span class="text-emeraude">·</span>
+        <span class="serif-em">WK Multi Services</span><span class="text-emeraude">·</span>
+        <span>SOS Hépatites CI</span><span class="text-emeraude">·</span>
+        <span class="serif-em">Dr Doba Soro</span><span class="text-emeraude">·</span>
+        <span>MAD Training</span><span class="text-emeraude">·</span>
+        <span>STRANINVEST</span><span class="text-emeraude">·</span>
+        <span class="serif-em">WK Multi Services</span><span class="text-emeraude">·</span>
+        <span>SOS Hépatites CI</span><span class="text-emeraude">·</span>
+        <span class="serif-em">Dr Doba Soro</span><span class="text-emeraude">·</span>
+        <span>MAD Training</span><span class="text-emeraude">·</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RÉALISATIONS CARDS ==================== -->
+  <section class="sec-light pb-24 md:pb-36">
+    <div class="container-app">
+      <div class="grid md:grid-cols-3 gap-6" data-reveal-stagger>
+        <div class="card-light p-8" data-tilt>
+          <div class="eyebrow text-emeraude mb-4">Groupe holding · 5 entités</div>
+          <div class="font-display text-2xl mb-3 text-[color:var(--color-encre)]">STRANINVEST</div>
+          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Communication corporate — point d'entrée vers une gestion de communication complète du groupe.</p>
+        </div>
+        <div class="card-light p-8" data-tilt>
+          <div class="eyebrow text-emeraude mb-4">TPE · Motos & après-vente</div>
+          <div class="font-display text-2xl mb-3 text-[color:var(--color-encre)]">WK Multi Services</div>
+          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Stratégie digitale pilotée par KPI — 300K → 700K FCFA de revenu mensuel projeté sur 3 mois.</p>
+        </div>
+        <div class="card-light p-8" data-tilt>
+          <div class="eyebrow text-emeraude mb-4">OSC · Cabinet médical</div>
+          <div class="font-display text-2xl mb-3 text-[color:var(--color-encre)]">SOS Hépatites CI · Dr Doba Soro</div>
+          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Sites institutionnels livrés — présence digitale professionnelle pour un secteur exigeant.</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/realisations/" class="btn-line-dark" data-magnetic>Voir toutes les réalisations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ENGAGEMENTS ==================== -->
+  <section class="sec-dark py-24 md:py-32 border-t hl-dark">
+    <div class="container-app">
+      <div class="max-w-3xl mb-14" data-reveal>
+        <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-4">Sans risque pour vous</div>
+        <h2 class="h-lg">Trois engagements, <span class="serif-em text-[color:var(--color-emeraude-glow)]">écrits noir sur blanc.</span></h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6" data-reveal-stagger>
+        <div class="glass-dark p-8" data-tilt>
+          <div class="font-display text-3xl text-[color:var(--color-emeraude-glow)] mb-4">①</div>
+          <div class="font-medium mb-2">Le diagnostic est gratuit — et utile</div>
+          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed">45 min d'appel, 3 recommandations concrètes à emporter. Même si vous ne signez jamais avec nous.</p>
+        </div>
+        <div class="glass-dark p-8" data-tilt>
+          <div class="font-display text-3xl text-[color:var(--color-emeraude-glow)] mb-4">②</div>
+          <div class="font-medium mb-2">Les chiffres réels, chaque mois</div>
+          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed">Dépense, résultats, coût par résultat. Si une campagne déçoit, c'est écrit dans le rapport — avec le plan de correction.</p>
+        </div>
+        <div class="glass-dark p-8" data-tilt>
+          <div class="font-display text-3xl text-[color:var(--color-emeraude-glow)] mb-4">③</div>
+          <div class="font-medium mb-2">Aucune reconduction tacite</div>
+          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed">Chaque mission a un début, une fin, un livrable. Vous re-signez si — et seulement si — les résultats le justifient.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA FINAL ==================== -->
+  <section class="sec-emeraude relative overflow-hidden">
+    <div class="orb-field" aria-hidden="true">
+      <div class="orb orb-ivoire orb-a w-[30rem] h-[30rem] -top-32 right-0"></div>
+    </div>
+    <div class="container-narrow py-24 md:py-32 text-center relative z-10" data-reveal>
+      <div class="eyebrow text-[color:var(--color-ivoire)]/70 mb-6">Prêt à voir plus loin ?</div>
+      <h2 class="h-xl mb-8 text-[color:var(--color-ivoire)]">
+        45 minutes pour comprendre<br/>
+        où votre marketing perd<br/>
+        <span class="serif-em">du temps et de l'argent.</span>
+      </h2>
+      <p class="max-w-2xl mx-auto mb-12 leading-relaxed text-[color:var(--color-ivoire)]/85">
+        Un appel de diagnostic gratuit, sans engagement. Vous repartez avec 3 recommandations concrètes, que vous décidiez ou non de travailler avec nous.
+      </p>
+      <a href="/contact/" class="inline-flex items-center justify-center gap-2 bg-[color:var(--color-ivoire)] text-[color:var(--color-encre)] font-medium px-8 py-4 rounded-full hover:bg-white transition-all hover:-translate-y-0.5" data-magnetic>
+        Réserver le diagnostic <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+</Layout>

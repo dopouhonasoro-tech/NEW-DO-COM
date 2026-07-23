@@ -1,0 +1,91 @@
+---
+import Logo from './Logo.astro';
+const { current = "", theme = "dark" } = Astro.props;
+const links = [
+  { href: "/", label: "Accueil", key: "accueil" },
+  { href: "/services/", label: "Services", key: "services" },
+  { href: "/realisations/", label: "Réalisations", key: "realisations" },
+  { href: "/a-propos/", label: "À propos", key: "a-propos" },
+];
+const isDark = theme === "dark";
+---
+
+<header
+  data-nav
+  data-theme={theme}
+  class:list={[
+    "fixed top-0 inset-x-0 z-50 transition-all duration-500",
+    isDark ? "bg-[color:var(--color-encre)]/70 border-b border-[color:var(--color-line-dark)]" : "bg-[color:var(--color-ivoire)]/80 border-b border-[color:var(--color-line-light)]",
+    "backdrop-blur-lg"
+  ]}
+>
+  <div class="container-app flex items-center justify-between h-16 md:h-20">
+    <a href="/" class="flex items-center gap-3 group">
+      <Logo variant={isDark ? "light" : "dark"} size={36} />
+      <div class="flex flex-col leading-none">
+        <span class:list={["font-display italic text-lg md:text-xl font-medium tracking-tight transition-colors", isDark ? "text-[color:var(--color-ivoire)]" : "text-[color:var(--color-encre)]"]}>DO COM</span>
+        <span class:list={["text-[10px] tracking-[0.24em] uppercase mt-0.5", isDark ? "text-[color:var(--color-gris-cool)]" : "text-[color:var(--color-gris-warm)]"]}>Voir plus loin</span>
+      </div>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-10" aria-label="Navigation principale">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "text-sm transition-colors relative py-1",
+            current === link.key
+              ? "text-[color:var(--color-emeraude-glow)]"
+              : isDark
+                ? "text-[color:var(--color-ivoire)] hover:text-[color:var(--color-emeraude-glow)]"
+                : "text-[color:var(--color-encre)] hover:text-[color:var(--color-emeraude)]"
+          ]}
+        >
+          {link.label}
+          {current === link.key && <span class="absolute -bottom-0.5 left-0 right-0 h-px bg-[color:var(--color-emeraude-glow)]"></span>}
+        </a>
+      ))}
+    </nav>
+
+    <a href="/contact/" class:list={["hidden sm:inline-flex btn-emeraude !py-2.5 !px-5 text-sm"]}>
+      Diagnostic gratuit
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>
+
+    <button
+      type="button"
+      data-menu-btn
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      class:list={["md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5", isDark ? "text-[color:var(--color-ivoire)]" : "text-[color:var(--color-encre)]"]}
+    >
+      <span class="block w-6 h-px bg-current transition-transform"></span>
+      <span class="block w-6 h-px bg-current transition-transform"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    data-menu
+    class="md:hidden hidden border-t bg-[color:var(--color-encre)] hl-dark"
+  >
+    <div class="container-app py-6 flex flex-col gap-2">
+      {links.map((link) => (
+        <a href={link.href} class="block py-3 text-lg font-display text-[color:var(--color-ivoire)] border-b hl-dark">
+          {link.label}
+        </a>
+      ))}
+      <a href="/contact/" class="btn-emeraude mt-4 w-full">Diagnostic gratuit <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Menu mobile
+  const btn = document.querySelector('[data-menu-btn]');
+  const menu = document.querySelector('[data-menu]');
+  btn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden');
+    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+  });
+</script>

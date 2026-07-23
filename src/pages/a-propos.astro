@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout current="a-propos" title="À propos — DO COM" navTheme="dark">
+
+  <section class="sec-dark pt-20 pb-24 md:pt-32 md:pb-32 border-b hl-dark">
+    <div class="container-app">
+      <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-8 animate-in">À propos</div>
+      <h1 class="h-mega max-w-5xl mb-10 animate-in" style="animation-delay: 200ms">
+        DO COM est né<br/>
+        d'un <span class="serif-em text-[color:var(--color-emeraude-glow)]">mot.</span>
+      </h1>
+      <p class="text-xl max-w-2xl leading-relaxed text-[color:var(--color-ivoire)]/85 animate-in" style="animation-delay: 400ms">
+        En langue Sénoufo, <span class="serif-em text-[color:var(--color-emeraude-glow)]">dopouhona</span> signifie « être porté pour voir plus loin ». C'est notre engagement envers chaque dirigeant que nous accompagnons.
+      </p>
+    </div>
+  </section>
+
+  <!-- HISTOIRE -->
+  <section class="sec-light py-24 md:py-32">
+    <div class="container-app grid md:grid-cols-12 gap-16 items-start">
+      <div class="md:col-span-5" data-reveal="left">
+        <div class="eyebrow text-emeraude mb-4">Notre histoire</div>
+        <h2 class="h-lg text-[color:var(--color-encre)]">
+          Une agence bâtie<br/>
+          sur ce que nous <span class="serif-em text-emeraude">refusons</span> de faire.
+        </h2>
+      </div>
+      <div class="md:col-span-7 space-y-6 text-[color:var(--color-gris-warm)] leading-relaxed text-lg" data-reveal>
+        <p>
+          DO COM a été fondée à Abidjan par Emmanuel Soro. Comme beaucoup d'agences digitales, nous avons commencé en essayant de tout faire — site web, branding, réseaux sociaux, maintenance, contenu, pub. Nous étions gentils. Nous étions moyens.
+        </p>
+        <p>
+          Un jour, la question qui change tout : <span class="serif-em text-emeraude">sur quoi sommes-nous réellement meilleurs que la moyenne, et qu'est-ce qui vaut de vendre 3 ans, 5 ans, 10 ans sans se lasser ?</span>
+        </p>
+        <p class="text-[color:var(--color-encre)]">
+          Notre réponse : la publicité digitale pilotée par les chiffres, le conseil stratégique honnête, et la création de sites web qui convertissent. Trois expertises. Un choix assumé.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 PRINCIPES -->
+  <section class="sec-dark py-24 md:py-32 border-t hl-dark">
+    <div class="container-app">
+      <div class="mb-16 max-w-3xl" data-reveal>
+        <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-4">Ce en quoi nous croyons</div>
+        <h2 class="h-xl">
+          Quatre principes qui<br/>
+          <span class="serif-em text-[color:var(--color-emeraude-glow)]">structurent</span> nos décisions.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6" data-reveal-stagger>
+        <div class="card-dark p-10" data-tilt>
+          <div class="font-display text-4xl text-[color:var(--color-emeraude-glow)] mb-6">01</div>
+          <div class="font-display text-2xl mb-4">Le chiffre <span class="serif-em">avant</span> la promesse.</div>
+          <p class="text-[color:var(--color-gris-cool)] leading-relaxed">Un rapport mensuel avec des chiffres réels. Si une campagne ne performe pas, nous le disons. Le marketing sans mesure est du théâtre.</p>
+        </div>
+        <div class="card-dark p-10" data-tilt>
+          <div class="font-display text-4xl text-[color:var(--color-emeraude-glow)] mb-6">02</div>
+          <div class="font-display text-2xl mb-4">Refuser reste un <span class="serif-em">service</span>.</div>
+          <p class="text-[color:var(--color-gris-cool)] leading-relaxed">Si votre besoin sort de nos 3 piliers, ou si le moment n'est pas bon, nous vous le disons. Vous économiser une mauvaise dépense fait partie de notre travail.</p>
+        </div>
+        <div class="card-dark p-10" data-tilt>
+          <div class="font-display text-4xl text-[color:var(--color-emeraude-glow)] mb-6">03</div>
+          <div class="font-display text-2xl mb-4">L'Afrique comme <span class="serif-em">ancrage</span>, pas comme excuse.</div>
+          <p class="text-[color:var(--color-gris-cool)] leading-relaxed">Nos clients africains ont droit au même niveau d'exécution qu'un client parisien. Le "on est en Afrique, ce sera bien pour ici" n'est pas une réponse acceptable.</p>
+        </div>
+        <div class="card-dark p-10" data-tilt>
+          <div class="font-display text-4xl text-[color:var(--color-emeraude-glow)] mb-6">04</div>
+          <div class="font-display text-2xl mb-4">Un vrai humain <span class="serif-em">répond</span>.</div>
+          <p class="text-[color:var(--color-gris-cool)] leading-relaxed">Pas de chatbot pour vous accueillir, pas de tunnel de tickets à 5 niveaux. Vous parlez à quelqu'un qui connaît votre dossier — sous 24 h en semaine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FONDATEUR -->
+  <section class="sec-light py-24 md:py-36">
+    <div class="container-app grid md:grid-cols-12 gap-12 md:gap-16 items-center">
+      <div class="md:col-span-5" data-reveal="left">
+        <div class="relative aspect-[3/4] overflow-hidden rounded-2xl bg-[color:var(--color-ivoire-soft)]">
+          <img
+            src="/media/emmanuel.webp"
+            alt="Emmanuel Soro, fondateur de DO COM"
+            class="w-full h-full object-cover"
+            loading="lazy"
+            width="1200"
+            height="1600"
+          />
+          <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[color:var(--color-encre)]/85 to-transparent text-[color:var(--color-ivoire)]">
+            <div class="font-display text-2xl">Emmanuel Soro</div>
+            <div class="text-xs uppercase tracking-widest opacity-80 mt-1">Fondateur · DO COM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-7 space-y-6" data-reveal>
+        <div class="eyebrow text-emeraude">Le fondateur</div>
+        <h2 class="h-lg text-[color:var(--color-encre)]">Emmanuel Soro</h2>
+        <div class="space-y-5 text-[color:var(--color-gris-warm)] leading-relaxed text-lg">
+          <p>
+            Basé à Abidjan (Cocody Angré). Formé au marketing digital par la pratique — d'abord sur mes propres projets, ensuite pour des clients de plus en plus exigeants.
+          </p>
+          <p class="text-[color:var(--color-encre)]">
+            Ma conviction : la plupart des agences vendent <span class="serif-em text-emeraude">de l'activité</span> ("on a posté 20 fois, on a fait 5 réunions") au lieu de vendre du résultat. Je refuse ce contrat implicite.
+          </p>
+          <p>
+            Chaque mandat DO COM se juge sur la question suivante : <span class="serif-em text-emeraude">est-ce que le client est mieux qu'avant, mesurablement ?</span>
+          </p>
+        </div>
+        <div class="pt-6 border-t hl-light space-y-1.5 text-sm text-[color:var(--color-gris-warm)]">
+          <div><span class="text-[color:var(--color-encre)] font-medium">Localisation</span> · Abidjan, Côte d'Ivoire</div>
+          <div><span class="text-[color:var(--color-encre)] font-medium">Email</span> · <a href="mailto:docommunication.ci@gmail.com" class="hover:text-emeraude">docommunication.ci@gmail.com</a></div>
+          <div><span class="text-[color:var(--color-encre)] font-medium">WhatsApp</span> · <a href="https://wa.me/2250711358623" class="hover:text-emeraude">+225 07 11 35 86 23</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sec-emeraude">
+    <div class="container-narrow py-20 md:py-28 text-center" data-reveal>
+      <h2 class="h-lg mb-6">Envie de tester notre méthode ?</h2>
+      <p class="max-w-2xl mx-auto mb-10 leading-relaxed text-[color:var(--color-ivoire)]/85">
+        45 minutes d'appel gratuit. Vous repartez avec 3 recommandations concrètes — que vous décidiez de travailler avec nous ou pas.
+      </p>
+      <a href="/contact/" class="inline-flex items-center justify-center gap-2 bg-[color:var(--color-ivoire)] text-[color:var(--color-encre)] font-medium px-8 py-4 rounded-full hover:bg-white transition-all hover:-translate-y-0.5">
+        Réserver le diagnostic <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+</Layout>
