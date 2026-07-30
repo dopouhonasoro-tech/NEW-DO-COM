@@ -11,3 +11,11 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Maquettes clients : jamais indexées par les moteurs de recherche.
+# Ces pages portent le nom et la marque de prospects — elles ne doivent
+# apparaître dans aucun résultat de recherche.
+[[headers]]
+  for = "/preview/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
