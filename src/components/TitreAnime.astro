@@ -1,0 +1,39 @@
+---
+/**
+ * Titre dont chaque ligne se dévoile depuis le bas, en cascade.
+ *
+ * Le texte est découpé en lignes à la construction, pas à l'exécution :
+ * pas de bibliothèque de découpage, et le texte reste intact dans le HTML
+ * pour les moteurs de recherche et les lecteurs d'écran.
+ */
+interface Props {
+  lignes: { texte: string; accent?: boolean }[];
+  niveau?: 'h1' | 'h2' | 'h3';
+  taille?: string;
+  /** Fond de la section : détermine la nuance de vert (contraste AA). */
+  ton?: 'dark' | 'light';
+  class?: string;
+}
+
+const {
+  lignes,
+  niveau = 'h2',
+  taille = 'h-xl',
+  ton = 'dark',
+  class: className = '',
+} = Astro.props as Props;
+
+const Balise = niveau;
+const accent =
+  ton === 'dark' ? 'text-[color:var(--color-vert)]' : 'text-[color:var(--color-vert-texte)]';
+---
+
+<Balise class:list={['titre-anime', taille, className]}>
+  {
+    lignes.map((l) => (
+      <span class="ligne-masque">
+        <span class:list={[l.accent && accent]}>{l.texte}</span>
+      </span>
+    ))
+  }
+</Balise>

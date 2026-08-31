@@ -1,52 +1,98 @@
 ---
 import Logo from './Logo.astro';
-const year = new Date().getFullYear();
+import { SITE, SOLUTIONS, NAV } from '../data/site';
+const annee = new Date().getFullYear();
 ---
 
 <footer class="sec-dark border-t hl-dark">
-  <div class="container-app pt-24 pb-12 grid gap-16 md:grid-cols-12">
-
-    <div class="md:col-span-5" data-reveal>
-      <div class="flex items-center gap-3 mb-6">
-        <Logo variant="light" size={44} />
-        <div>
-          <div class="font-display italic text-2xl">DO COM</div>
-          <div class="eyebrow text-[color:var(--color-gris-cool)] mt-1">Voir plus loin</div>
-        </div>
+  <div class="container-app pt-16 md:pt-24 pb-10 grid gap-12 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <div class="flex items-center gap-3 mb-5">
+        <Logo size={40} />
+        <span class="flex flex-col leading-none">
+          <span class="font-display text-xl font-bold tracking-tight">DO COM</span>
+          <span class="eyebrow text-[color:var(--color-vert)] mt-1.5">{SITE.signature}</span>
+        </span>
       </div>
-      <p class="text-[color:var(--color-gris-cool)] max-w-md leading-relaxed">
-        Agence de marketing digital ancrée en Afrique de l'Ouest, tournée vers l'Europe francophone. Nous portons les entrepreneurs, TPE, PME et OSC là où leur croissance mérite d'être.
+      <p class="text-[color:var(--color-gris-sombre)] max-w-sm leading-relaxed text-sm">
+        Nous aidons les entreprises et les organisations à transformer leur activité grâce au
+        digital, au marketing et à l’intelligence artificielle. Basés à {SITE.ville}, nous
+        intervenons en Afrique et en Europe francophone.
       </p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/contact/" class="btn-emeraude !py-2.5 !px-5 text-sm">Nous écrire <span class="arrow">→</span></a>
-        <a href="https://wa.me/2250711358623" class="btn-line-light !py-2.5 !px-5 text-sm">WhatsApp</a>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/contact/" class="btn btn-vert !py-2.5 !px-4 text-sm">
+          Parlons de votre projet <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href={SITE.whatsapp} rel="noopener" class="btn btn-ghost-light !py-2.5 !px-4 text-sm"
+          >WhatsApp</a
+        >
       </div>
     </div>
 
-    <div class="md:col-span-3" data-reveal>
-      <div class="eyebrow mb-5 text-[color:var(--color-emeraude-glow)]">Expertises</div>
-      <ul class="space-y-3 text-sm">
-        <li><a href="/services/#publicite" class="text-[color:var(--color-ivoire)] hover:text-[color:var(--color-emeraude-glow)] transition-colors">Publicité digitale & growth</a></li>
-        <li><a href="/services/#audit" class="text-[color:var(--color-ivoire)] hover:text-[color:var(--color-emeraude-glow)] transition-colors">Audit & conseil stratégique</a></li>
-        <li><a href="/services/#site" class="text-[color:var(--color-ivoire)] hover:text-[color:var(--color-emeraude-glow)] transition-colors">Création de site web</a></li>
+    <nav class="md:col-span-4" aria-labelledby="footer-solutions">
+      <h2 id="footer-solutions" class="eyebrow mb-5 text-[color:var(--color-vert)]">Solutions</h2>
+      <ul class="space-y-2.5 text-sm">
+        {
+          SOLUTIONS.map((s) => (
+            <li>
+              <a
+                href={`/solutions/${s.slug}/`}
+                class="text-[color:var(--color-blanc)] hover:text-[color:var(--color-vert)] transition-colors"
+              >
+                {s.titre}
+              </a>
+            </li>
+          ))
+        }
       </ul>
-    </div>
+    </nav>
 
-    <div class="md:col-span-4" data-reveal>
-      <div class="eyebrow mb-5 text-[color:var(--color-emeraude-glow)]">Contact</div>
-      <ul class="space-y-3 text-sm">
-        <li><a href="mailto:docommunication.ci@gmail.com" class="hover:text-[color:var(--color-emeraude-glow)] transition-colors">docommunication.ci@gmail.com</a></li>
-        <li><a href="https://wa.me/2250711358623" class="hover:text-[color:var(--color-emeraude-glow)] transition-colors">+225 07 11 35 86 23</a></li>
-        <li class="text-[color:var(--color-gris-cool)]">Abidjan · Cocody Angré</li>
-        <li class="text-[color:var(--color-gris-cool)]">Côte d'Ivoire</li>
+    <div class="md:col-span-3">
+      <h2 class="eyebrow mb-5 text-[color:var(--color-vert)]">Contact</h2>
+      <ul class="space-y-2.5 text-sm">
+        <li>
+          <a
+            href={`mailto:${SITE.email}`}
+            class="hover:text-[color:var(--color-vert)] transition-colors break-words">{SITE.email}</a
+          >
+        </li>
+        <li>
+          <a
+            href={`tel:${SITE.telephoneE164}`}
+            class="hover:text-[color:var(--color-vert)] transition-colors">{SITE.telephone}</a
+          >
+        </li>
+        <li class="text-[color:var(--color-gris-sombre)] pt-1">
+          {SITE.ville} · {SITE.quartier}<br />{SITE.pays}
+        </li>
+      </ul>
+
+      <h2 class="eyebrow mb-4 mt-8 text-[color:var(--color-vert)]">Navigation</h2>
+      <ul class="space-y-2.5 text-sm">
+        {
+          NAV.map((l) => (
+            <li>
+              <a href={l.href} class="hover:text-[color:var(--color-vert)] transition-colors">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/faq/" class="hover:text-[color:var(--color-vert)] transition-colors">
+            Questions fréquentes
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 
   <div class="border-t hl-dark">
-    <div class="container-app py-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-[color:var(--color-gris-cool)]">
-      <span>© {year} DO COM · Dopouhona, être élevé pour voir plus loin.</span>
-      <span>Afrique & Europe francophone</span>
+    <div
+      class="container-app py-5 flex flex-col md:flex-row justify-between gap-2 text-xs text-[color:var(--color-gris-sombre)]"
+    >
+      <span>© {annee} DO COM — {SITE.signature}</span>
+      <span>Afrique &amp; Europe francophone</span>
     </div>
   </div>
 </footer>

@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { FAQ, SITE } from '../data/site';
+
+const toutes = FAQ.flatMap((g) => g.questions);
+---
+
+<Layout
+  title="Questions fréquentes"
+  description="Déroulement d’un projet, budget et acompte, méthode, propriété du code, usage de l’IA : les réponses aux questions que posent le plus souvent les dirigeants avant de travailler avec DO COM."
+  current="faq"
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: toutes.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.r },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Questions fréquentes', item: `${SITE.url}/faq/` },
+      ],
+    },
+  ]}
+>
+  <PageHero
+    eyebrow="Questions fréquentes"
+    lede="Les questions que les dirigeants nous posent avant de s’engager, avec des réponses directes. Si la vôtre n’y est pas, écrivez-nous : nous répondons sous 24 h ouvrées."
+  >
+    Ce qu’on nous demande<br />
+    <span class="text-[color:var(--color-vert)]">avant de signer.</span>
+  </PageHero>
+
+  <!-- Sommaire -->
+  <section class="sec-ink border-y hl-dark">
+    <div class="container-app py-6 md:py-7">
+      <nav aria-label="Sommaire des questions">
+        <ul class="flex flex-wrap gap-2">
+          {
+            FAQ.map((g) => (
+              <li>
+                <a
+                  href={`#${g.id}`}
+                  class="inline-block text-sm border border-[color:var(--color-filet-sombre)] rounded-md px-3.5 py-2 text-[color:var(--color-gris-sombre)] hover:border-[color:var(--color-vert)] hover:text-[color:var(--color-vert)] transition-colors"
+                >
+                  {g.titre}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Groupes de questions -->
+  {
+    FAQ.map((groupe, i) => (
+      <section
+        id={groupe.id}
+        class:list={['py-14 md:py-24 scroll-mt-20', i % 2 === 0 ? 'sec-light' : 'sec-paper']}
+      >
+        <div class="container-app grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          <div class="lg:col-span-4" data-reveal>
+            <p class="eyebrow text-[color:var(--color-vert-texte)] mb-4">
+              {String(i + 1).padStart(2, '0')}
+            </p>
+            <h2 class="h-lg lg:sticky lg:top-28">{groupe.titre}</h2>
+          </div>
+
+          <div class="lg:col-span-8 border-t hl-light" data-reveal>
+            {groupe.questions.map((item) => (
+              <details class="faq-item group border-b hl-light">
+                <summary>
+                  <span class="faq-question">{item.q}</span>
+                  <span class="faq-signe" aria-hidden="true" />
+                </summary>
+                <div class="faq-reponse">
+                  <p>{item.r}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <!-- Question absente -->
+  <section class="sec-dark py-14 md:py-20 border-t hl-dark">
+    <div class="container-app grid lg:grid-cols-12 gap-6 lg:gap-16 items-center" data-reveal>
+      <div class="lg:col-span-7">
+        <p class="eyebrow text-[color:var(--color-vert)] mb-4">Votre question n’y est pas</p>
+        <h2 class="h-lg">Posez-la directement. C’est souvent plus rapide que de chercher.</h2>
+      </div>
+      <div class="lg:col-span-5 flex flex-col sm:flex-row lg:justify-end gap-3">
+        <a href="/contact/" class="btn btn-vert">
+          Écrire à DO COM <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href={SITE.whatsapp} rel="noopener" class="btn btn-ghost-light">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

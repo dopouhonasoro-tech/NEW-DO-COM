@@ -1,0 +1,35 @@
+---
+import { SITE } from '../data/site';
+
+interface Props {
+  titre?: string;
+  texte?: string;
+}
+const {
+  titre = 'Décrivez-nous votre situation. Nous vous dirons si nous sommes utiles.',
+  texte = 'Un échange de 45 minutes pour comprendre votre activité et repérer ce qui peut être digitalisé, automatisé ou simplifié. Vous repartez avec des pistes concrètes, que nous travaillions ensemble ou non.',
+} = Astro.props as Props;
+---
+
+<section class="sec-dark relative overflow-hidden border-t hl-dark">
+  <div class="grid-field" aria-hidden="true"></div>
+  <div
+    class="glow-vert w-[34rem] h-[34rem] -bottom-64 left-1/2 -translate-x-1/2"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-narrow py-20 md:py-28 relative text-center" data-reveal>
+    <p class="eyebrow text-[color:var(--color-vert)] mb-6">Commencer</p>
+    <h2 class="h-xl mb-6 max-w-3xl mx-auto">{titre}</h2>
+    <p class="lede text-[color:var(--color-gris-sombre)] max-w-2xl mx-auto mb-10">{texte}</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="/contact/" class="btn btn-vert">
+        Parlons de votre projet <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a href={SITE.whatsapp} rel="noopener" class="btn btn-ghost-light">
+        Écrire sur WhatsApp
+      </a>
+    </div>
+  </div>
+</section>

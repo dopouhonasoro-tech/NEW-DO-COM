@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { PROCESSUS, SITE } from '../data/site';
+
+const detail: Record<string, { livrable: string; questions: string[] }> = {
+  Comprendre: {
+    livrable: 'Une restitution écrite de ce que nous avons compris de votre activité.',
+    questions: [
+      'De quoi vit l’organisation, concrètement ?',
+      'Qui fait quoi, et qui attend quoi ?',
+      'Qu’est-ce qui a déjà été tenté, et pourquoi ça n’a pas tenu ?',
+    ],
+  },
+  Diagnostiquer: {
+    livrable: 'Une liste de problèmes hiérarchisés, avec leur coût estimé en temps.',
+    questions: [
+      'Où le travail passe-t-il le plus de temps à attendre ?',
+      'Quelles informations sont ressaisies plusieurs fois ?',
+      'Quelle défaillance ferait le plus de dégâts ?',
+    ],
+  },
+  Concevoir: {
+    livrable: 'Un périmètre écrit et chiffré : ce qui est inclus, ce qui est exclu, dans quel ordre.',
+    questions: [
+      'Quelle est la plus petite chose qui règle déjà un vrai problème ?',
+      'Qu’est-ce qui peut attendre la phase suivante sans bloquer la première ?',
+      'Quelles limites techniques devez-vous connaître avant de signer ?',
+    ],
+  },
+  Construire: {
+    livrable: 'Des paliers livrés et utilisables, validés un par un.',
+    questions: [
+      'Ce palier est-il réellement utilisable en l’état ?',
+      'Qu’est-ce que l’usage nous apprend qui change la suite ?',
+      'Est-ce que ça tient sur une connexion mobile locale ?',
+    ],
+  },
+  Déployer: {
+    livrable: 'La mise en production, les accès transmis, les utilisateurs formés.',
+    questions: [
+      'Qui administre l’outil au quotidien, une fois que nous partons ?',
+      'Que se passe-t-il en cas de panne ou d’erreur de saisie ?',
+      'La documentation permet-elle de reprendre sans nous ?',
+    ],
+  },
+  Optimiser: {
+    livrable: 'Un point de mesure régulier, et des décisions qui en découlent.',
+    questions: [
+      'Qu’est-ce que les chiffres disent réellement, trois mois après ?',
+      'Qu’est-ce qui doit être arrêté plutôt que reconduit ?',
+      'Quel est le prochain point de friction devenu prioritaire ?',
+    ],
+  },
+};
+
+const attentes = [
+  {
+    titre: 'De l’accès aux bonnes personnes',
+    texte:
+      'Un diagnostic construit uniquement avec la direction passe à côté du travail réel. Nous avons besoin de parler à ceux qui exécutent.',
+  },
+  {
+    titre: 'Des réponses franches',
+    texte:
+      'Ce qui a échoué avant nous est l’information la plus utile du projet. La cacher nous fait refaire la même erreur, à vos frais.',
+  },
+  {
+    titre: 'Une décision par palier',
+    texte:
+      'Chaque palier livré demande une validation de votre part. Un projet qui attend trois semaines une réponse prend trois semaines de retard.',
+  },
+];
+---
+
+<Layout
+  title="Notre approche — comprendre avant de construire"
+  description="La méthode DO COM en six étapes : comprendre, diagnostiquer, concevoir, construire, déployer, optimiser. Le problème avant la technologie."
+  current="approche"
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'La méthode DO COM',
+      description:
+        'Six étapes de la transformation digitale d’une organisation, du diagnostic à l’optimisation.',
+      step: PROCESSUS.map((p, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: p.titre,
+        text: p.texte,
+      })),
+    },
+  ]}
+>
+  <PageHero
+    eyebrow="Notre approche"
+    lede="La plupart des projets digitaux échouent avant la première ligne de code : on a construit la bonne solution pour le mauvais problème. Notre méthode existe pour éviter exactement ça."
+  >
+    Nous commençons<br />
+    <span class="text-[color:var(--color-vert)]">par le problème.</span>
+  </PageHero>
+
+  <!-- Principe -->
+  <section class="sec-light py-16 md:py-28">
+    <div class="container-app grid lg:grid-cols-12 gap-8 lg:gap-16">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-[color:var(--color-vert-texte)] mb-5">Le principe</p>
+        <h2 class="h-xl">Un outil ne règle rien qu’un processus clair n’ait déjà réglé.</h2>
+      </div>
+      <div
+        class="lg:col-span-7 space-y-5 text-[color:var(--color-gris-clair)] leading-relaxed lede"
+        data-reveal
+      >
+        <p>
+          Digitaliser un processus mal défini ne le corrige pas : ça l’enferme dans un logiciel, où
+          il devient plus difficile à changer qu’avant. C’est la raison pour laquelle tant
+          d’entreprises ont un outil coûteux que personne n’utilise, et un fichier Excel à côté qui
+          fait le vrai travail.
+        </p>
+        <p>
+          Nous consacrons donc les trois premières étapes à comprendre et à décider — avant que la
+          moindre technologie soit choisie. C’est la partie que la plupart des prestataires sautent,
+          parce qu’elle ne se voit pas dans un devis.
+        </p>
+        <p class="text-[color:var(--color-noir)] font-medium">
+          À la fin de ces trois étapes, il arrive que notre conclusion soit : ce projet ne vaut pas
+          l’investissement. Nous le disons.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Les 6 étapes -->
+  <section class="sec-dark py-16 md:py-28 relative overflow-hidden">
+    <div class="grid-field" aria-hidden="true"></div>
+    <div class="container-app relative">
+      <SectionHead eyebrow="Six étapes">
+        <h2 class="h-xl">Dans cet ordre, sans raccourci.</h2>
+      </SectionHead>
+
+      <ol class="mt-14 md:mt-20 border-t hl-dark">
+        {
+          PROCESSUS.map((p) => (
+            <li class="grid lg:grid-cols-12 gap-4 lg:gap-10 py-10 md:py-14 border-b hl-dark" data-reveal>
+              <div class="lg:col-span-4">
+                <p class="eyebrow text-[color:var(--color-vert)] mb-4">{p.num}</p>
+                <h3 class="h-lg">{p.titre}</h3>
+              </div>
+              <div class="lg:col-span-5">
+                <p class="text-[color:var(--color-gris-sombre)] leading-relaxed mb-6">{p.texte}</p>
+                <p class="eyebrow text-[color:var(--color-gris-sombre)] mb-3">
+                  Questions que nous posons
+                </p>
+                <ul class="space-y-2 text-sm text-[color:var(--color-gris-sombre)]">
+                  {detail[p.titre].questions.map((q) => (
+                    <li class="rule-accent">{q}</li>
+                  ))}
+                </ul>
+              </div>
+              <div class="lg:col-span-3">
+                <div class="card-dark carte-lueur p-6 h-full">
+                  <p class="eyebrow text-[color:var(--color-vert)] mb-3">Livrable</p>
+                  <p class="text-sm text-[color:var(--color-gris-sombre)] leading-relaxed">
+                    {detail[p.titre].livrable}
+                  </p>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ce que nous attendons de vous -->
+  <section class="sec-paper py-16 md:py-28">
+    <div class="container-app">
+      <SectionHead eyebrow="Réciprocité" tone="light">
+        <h2 class="h-xl">Ce que nous attendons de votre côté.</h2>
+        <p class="lede text-[color:var(--color-gris-clair)] max-w-2xl mt-6">
+          Un projet de transformation n’est pas une prestation qu’on dépose. Trois conditions
+          déterminent son résultat plus que notre travail lui-même.
+        </p>
+      </SectionHead>
+
+      <div class="grid md:grid-cols-3 gap-x-8 gap-y-9 mt-14 md:mt-20" data-reveal-stagger>
+        {
+          attentes.map((a, i) => (
+            <div class="step step-light">
+              <p class="eyebrow text-[color:var(--color-vert-texte)] mb-3">
+                {String(i + 1).padStart(2, '0')}
+              </p>
+              <h3 class="h-md mb-2.5">{a.titre}</h3>
+              <p class="text-[color:var(--color-gris-clair)] leading-relaxed text-sm">{a.texte}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Le diagnostic -->
+  <section class="sec-vert py-16 md:py-28">
+    <div class="container-narrow" data-reveal>
+      <p class="eyebrow text-white mb-6">Le point d’entrée</p>
+      <h2 class="h-xl mb-8">Le diagnostic de transformation.</h2>
+      <p class="lede text-white/85 mb-10 max-w-2xl">
+        Un échange de 45 minutes, en visio ou sur WhatsApp, pour cartographier rapidement votre
+        façon de travailler et repérer ce qui peut être digitalisé, automatisé ou simplement
+        supprimé.
+      </p>
+
+      <ul class="grid sm:grid-cols-2 gap-x-10 gap-y-4 mb-10 text-white/85">
+        <li class="rule-accent">Nous cherchons à comprendre votre activité, pas à vous vendre un service</li>
+        <li class="rule-accent">Vous repartez avec des pistes concrètes, exploitables sans nous</li>
+        <li class="rule-accent">Sans engagement, et sans relance commerciale insistante</li>
+        <li class="rule-accent">Si nous ne sommes pas le bon interlocuteur, nous vous le disons</li>
+      </ul>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="/contact/" class="btn btn-vert">
+          Demander un diagnostic <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href={SITE.whatsapp} rel="noopener" class="btn btn-ghost-light">Écrire sur WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

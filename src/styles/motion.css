@@ -1,0 +1,284 @@
+/* ==========================================================================
+   DO COM — COUCHE DE MOUVEMENT
+   Principe : une seule variable --p (0 → 1) par element observe, alimentee
+   par un unique rAF. Toutes les animations en derivent.
+   Regle de repli : --p vaut 1 par defaut. Si le JavaScript ne s'execute pas,
+   chaque scene s'affiche dans son etat final, jamais dans un etat casse.
+   ========================================================================== */
+
+@property --p {
+  syntax: '<number>';
+  initial-value: 1;
+  inherits: true;
+}
+
+[data-progres] { --p: 1; }
+
+
+/* ==================== INTEGRATION LENIS ====================
+   Le scroll natif doit rester non anime : c'est Lenis qui gere l'inertie.
+   Sans JavaScript, html n'a pas la classe .js et le defilement doux natif
+   du navigateur reprend la main. */
+html.js { scroll-behavior: auto; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ==================== TRANSITIONS DE PAGE ====================
+   API native de transition de vue, sans routeur ni JavaScript.
+   Ignoree par les navigateurs qui ne la connaissent pas. */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vtSortie .28s cubic-bezier(.4,0,1,1) both;
+  }
+  ::view-transition-new(root) {
+    animation: vtEntree .42s cubic-bezier(.16,1,.3,1) both;
+  }
+}
+@keyframes vtSortie {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+@keyframes vtEntree {
+  from { opacity: 0; transform: translateY(12px); }
+}
+
+/* ==================== TITRES REVELES LIGNE PAR LIGNE ==================== */
+.ligne-masque {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em; /* laisse respirer les jambages */
+  margin-bottom: -0.06em;
+}
+.ligne-masque > span {
+  display: block;
+  will-change: transform;
+}
+.js .ligne-masque > span {
+  transform: translateY(110%);
+  transition:
+    transform 1.05s cubic-bezier(.16, 1, .3, 1),
+    opacity .8s ease;
+  opacity: 0;
+}
+.js .titre-anime.est-visible .ligne-masque > span,
+.js .titre-anime.animer .ligne-masque > span {
+  transform: none;
+  opacity: 1;
+}
+/* Cascade : chaque ligne part legerement apres la precedente */
+.ligne-masque:nth-child(2) > span { transition-delay: .09s; }
+.ligne-masque:nth-child(3) > span { transition-delay: .18s; }
+.ligne-masque:nth-child(4) > span { transition-delay: .27s; }
+
+/* ==================== PARALLAXE PILOTEE PAR LE SCROLL ==================== */
+.parallaxe-lente { transform: translate3d(0, calc(var(--p) * 60px), 0); }
+.parallaxe-halo  { transform: translate3d(0, calc(var(--p) * -90px), 0); }
+
+/* La grille du heros se resserre et s'efface en descendant */
+.grille-scroll {
+  transform: translate3d(0, calc(var(--p) * 50px), 0);
+  opacity: calc(1 - var(--p) * .75);
+}
+
+/* ==================== SCENE : DU DESORDRE AU SYSTEME ====================
+   Chaque fragment est positionne a sa place FINALE (grille ordonnee).
+   Le desordre est un decalage qui se resorbe quand --p passe de 0 a 1. */
+.scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+}
+@media (min-width: 768px) { .scene { aspect-ratio: 16 / 8.5; } }
+
+.fragment {
+  position: absolute;
+  /* Mobile : 2 colonnes × 4 lignes. */
+  left: var(--xp);
+  top: var(--yp);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .6rem .75rem;
+  border-radius: .5rem;
+  border: 1px solid;
+  font-family: var(--font-mono);
+  font-size: clamp(.5rem, 1.15vw, .75rem);
+  letter-spacing: .02em;
+  white-space: nowrap;
+  background-color: var(--color-encre-2);
+
+  /* Le decalage du desordre disparait a mesure que --p croit */
+  transform:
+    translate3d(
+      calc(var(--dx, 0px) * (1 - var(--p))),
+      calc(var(--dy, 0px) * (1 - var(--p))),
+      0
+    )
+    rotate(calc(var(--rot, 0deg) * (1 - var(--p))))
+    scale(calc(1 - .06 * (1 - var(--p))));
+
+  /* Le cadre passe du gris au vert une fois range */
+  border-color: color-mix(
+    in srgb,
+    var(--color-vert) calc(var(--p) * 70%),
+    var(--color-filet-sombre)
+  );
+  color: color-mix(
+    in srgb,
+    var(--color-blanc) calc(var(--p) * 100%),
+    var(--color-gris-sombre)
+  );
+  will-change: transform;
+}
+
+.fragment .pastille {
+  width: .4rem;
+  height: .4rem;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  background-color: color-mix(
+    in srgb,
+    var(--color-vert) calc(var(--p) * 100%),
+    var(--color-gris-sombre)
+  );
+}
+
+/* Grand ecran : 4 colonnes × 2 lignes. */
+@media (min-width: 768px) {
+  .fragment {
+    left: var(--xg);
+    top: var(--yg);
+  }
+}
+
+/* Liens du systeme : se tracent au fur et a mesure.
+   Le trace correspond a la grille 4 × 2 : masque sous 768px, ou la scene
+   passe en 2 colonnes et ou l'alignement suffit a porter le message. */
+.scene-liens {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  display: none;
+}
+@media (min-width: 768px) {
+  .scene-liens { display: block; }
+}
+.scene-liens path {
+  fill: none;
+  stroke: var(--color-vert);
+  stroke-width: 1;
+  opacity: calc(var(--p) * var(--p) * .55);
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--p));
+}
+
+/* Les deux legendes se relaient */
+.legende-avant { opacity: calc(1 - var(--p) * 1.6); }
+.legende-apres { opacity: calc((var(--p) - .55) * 2.2); }
+
+/* ==================== SEQUENCE EPINGLEE (METHODE) ==================== */
+.sequence-colonne { position: sticky; top: 0; }
+
+.etape-seq {
+  transition: opacity .45s ease, transform .45s cubic-bezier(.16,1,.3,1);
+}
+/* L'attenuation des etapes inactives n'a de sens qu'avec la colonne epinglee,
+   donc a partir de « lg ». En dessous, la liste se lit d'un bloc : tout reste
+   pleinement lisible. */
+@media (min-width: 1024px) {
+  .js .etape-seq:not([data-active]) {
+    opacity: .28;
+    transform: translateX(-6px);
+  }
+  .js .etape-seq[data-active] { opacity: 1; transform: none; }
+}
+
+.etape-seq .barre {
+  height: 1px;
+  background-color: var(--color-filet-sombre);
+  position: relative;
+  overflow: hidden;
+}
+.etape-seq .barre::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background-color: var(--color-vert);
+  transition: width .5s cubic-bezier(.16,1,.3,1);
+}
+.js .etape-seq[data-active] .barre::after { width: 100%; }
+
+/* ==================== SURVOL DES CARTES ==================== */
+.carte-lueur { position: relative; overflow: hidden; }
+.carte-lueur::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+  background: radial-gradient(
+    340px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(16, 185, 129, .13),
+    transparent 62%
+  );
+}
+.carte-lueur:hover::before { opacity: 1; }
+
+/* ==================== DEFILEMENT CONTINU ==================== */
+.bandeau {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.bandeau-piste {
+  display: flex;
+  width: max-content;
+  gap: 2.5rem;
+  animation: defile 46s linear infinite;
+}
+.bandeau:hover .bandeau-piste { animation-play-state: paused; }
+@keyframes defile {
+  to { transform: translateX(-50%); }
+}
+
+/* ==================== INDICATEUR DE DEFILEMENT ==================== */
+.indice-scroll {
+  width: 1px;
+  height: 3rem;
+  background-color: var(--color-filet-sombre);
+  position: relative;
+  overflow: hidden;
+}
+.indice-scroll::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 40%;
+  background-color: var(--color-vert);
+  animation: glisse 2.4s cubic-bezier(.6,0,.4,1) infinite;
+}
+@keyframes glisse {
+  0%   { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(250%); }
+}
+
+/* ==================== MOUVEMENT REDUIT ====================
+   Tout est fige dans l'etat final : rien ne bouge, rien ne manque. */
+@media (prefers-reduced-motion: reduce) {
+  [data-progres] { --p: 1 !important; }
+  .js .ligne-masque > span { transform: none !important; opacity: 1 !important; }
+  .parallaxe-lente, .parallaxe-halo, .grille-scroll { transform: none !important; opacity: 1; }
+  .bandeau-piste { animation: none; }
+  .indice-scroll::after { animation: none; transform: none; }
+  .js .etape-seq:not([data-active]) { opacity: 1; transform: none; }
+  .js .etape-seq .barre::after { width: 100%; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}

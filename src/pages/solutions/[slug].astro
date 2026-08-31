@@ -1,0 +1,158 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SOLUTIONS, SITE } from '../../data/site';
+import type { Solution } from '../../data/site';
+
+export function getStaticPaths() {
+  return SOLUTIONS.map((solution) => ({
+    params: { slug: solution.slug },
+    props: { solution },
+  }));
+}
+
+const { solution } = Astro.props as { solution: Solution };
+
+const autres = SOLUTIONS.filter((s) => s.slug !== solution.slug).slice(0, 3);
+---
+
+<Layout
+  title={solution.seoTitre}
+  description={solution.seoDescription}
+  current="solutions"
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: solution.titre,
+      description: solution.accroche,
+      serviceType: solution.titre,
+      provider: { '@id': `${SITE.url}/#organisation` },
+      areaServed: { '@type': 'Country', name: 'Côte d’Ivoire' },
+      url: `${SITE.url}/solutions/${solution.slug}/`,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Solutions', item: `${SITE.url}/solutions/` },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: solution.titre,
+          item: `${SITE.url}/solutions/${solution.slug}/`,
+        },
+      ],
+    },
+  ]}
+>
+  <PageHero eyebrow={`Solution ${solution.index}`} lede={solution.accroche}>
+    {solution.titre}
+  </PageHero>
+
+  <!-- PROBLÈME -->
+  <section class="sec-light py-16 md:py-28">
+    <div class="container-app grid lg:grid-cols-12 gap-8 lg:gap-16">
+      <div class="lg:col-span-4" data-reveal>
+        <p class="eyebrow text-[color:var(--color-vert-texte)] mb-4">Problème</p>
+        <h2 class="h-lg">{solution.probleme}</h2>
+      </div>
+      <ul class="lg:col-span-8 grid sm:grid-cols-2 gap-4" data-reveal-stagger>
+        {
+          solution.problemeDetails.map((d) => (
+            <li class="card-light carte-lueur p-6 text-[color:var(--color-gris-clair)] leading-relaxed">{d}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- APPROCHE -->
+  <section class="sec-dark py-16 md:py-28 relative overflow-hidden">
+    <div class="grid-field" aria-hidden="true"></div>
+    <div class="container-app relative grid lg:grid-cols-12 gap-8 lg:gap-16">
+      <div class="lg:col-span-4" data-reveal>
+        <p class="eyebrow text-[color:var(--color-vert)] mb-4">Approche</p>
+        <h2 class="h-lg">{solution.approche}</h2>
+      </div>
+      <ol class="lg:col-span-8 grid sm:grid-cols-2 gap-x-8 gap-y-9" data-reveal-stagger>
+        {
+          solution.approcheEtapes.map((e, i) => (
+            <li class="step">
+              <p class="eyebrow text-[color:var(--color-vert)] mb-3">
+                {String(i + 1).padStart(2, '0')}
+              </p>
+              <h3 class="h-md mb-2.5">{e.titre}</h3>
+              <p class="text-sm text-[color:var(--color-gris-sombre)] leading-relaxed">{e.texte}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- VALEUR -->
+  <section class="sec-paper py-16 md:py-28">
+    <div class="container-app grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+      <div class="lg:col-span-4" data-reveal>
+        <p class="eyebrow text-[color:var(--color-vert-texte)] mb-4">Valeur</p>
+        <h2 class="h-lg">{solution.valeur}</h2>
+      </div>
+      <ul class="lg:col-span-8 border-t hl-light" data-reveal-stagger>
+        {
+          solution.valeurPoints.map((p) => (
+            <li class="py-5 border-b hl-light font-display text-lg md:text-xl font-medium tracking-tight">
+              {p}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ACTION -->
+  <section class="sec-dark py-16 md:py-24 border-t hl-dark">
+    <div class="container-app grid lg:grid-cols-12 gap-8 items-center" data-reveal>
+      <div class="lg:col-span-7">
+        <p class="eyebrow text-[color:var(--color-vert)] mb-4">Action</p>
+        <h2 class="h-lg">{solution.action}</h2>
+      </div>
+      <div class="lg:col-span-5 flex flex-col sm:flex-row lg:justify-end gap-3">
+        <a href="/contact/" class="btn btn-vert">
+          Parlons de votre projet <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="/approche/" class="btn btn-ghost-light">Notre méthode</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTRES SOLUTIONS -->
+  <section class="sec-light py-16 md:py-24">
+    <div class="container-app">
+      <p class="eyebrow text-[color:var(--color-vert-texte)] mb-8" data-reveal>Autres solutions</p>
+      <div class="grid md:grid-cols-3 gap-4" data-reveal-stagger>
+        {
+          autres.map((s) => (
+            <a href={`/solutions/${s.slug}/`} class="card-light carte-lueur p-7 group flex flex-col">
+              <p class="eyebrow text-[color:var(--color-gris-clair)] mb-5">{s.index}</p>
+              <h3 class="h-md mb-3">{s.titre}</h3>
+              <p class="text-sm text-[color:var(--color-gris-clair)] leading-relaxed grow">
+                {s.accroche}
+              </p>
+              <span class="text-sm text-[color:var(--color-vert-texte)] mt-6 font-medium">
+                En savoir plus{' '}
+                <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">
+                  →
+                </span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

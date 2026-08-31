@@ -11,6 +11,13 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+
+# Polices Google : mises en cache longue durée par le navigateur.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 # Maquettes clients : jamais indexées par les moteurs de recherche.
 # Ces pages portent le nom et la marque de prospects — elles ne doivent
@@ -19,3 +26,18 @@
   for = "/preview/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow, noarchive"
+
+# --- Redirections de l'ancienne arborescence (refonte 2026) ---
+# L'ancienne page /services/ est remplacée par /solutions/.
+# Les ancres de l'ancien site pointaient vers ses trois piliers.
+[[redirects]]
+  from = "/services"
+  to = "/solutions/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/*"
+  to = "/solutions/"
+  status = 301
+  force = true

@@ -1,0 +1,21 @@
+---
+/**
+ * En-tête de section asymétrique : libellé mono à gauche, titre éditorial à droite.
+ * `tone` adapte la couleur du libellé au fond de la section.
+ */
+interface Props {
+  eyebrow: string;
+  tone?: 'dark' | 'light';
+  class?: string;
+}
+const { eyebrow, tone = 'dark', class: className = '' } = Astro.props as Props;
+const eyebrowColor =
+  tone === 'dark' ? 'text-[color:var(--color-vert)]' : 'text-[color:var(--color-vert-texte)]';
+---
+
+<div class:list={['sec-head', className]} data-reveal>
+  <p class:list={['eyebrow pt-2', eyebrowColor]}>{eyebrow}</p>
+  <div>
+    <slot />
+  </div>
+</div>

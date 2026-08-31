@@ -1,16 +1,20 @@
 ---
-const { variant = "light", size = 40 } = Astro.props;
-// variant "light" = pour fond sombre (le symbole a un fond blanc, contraste avec la nav noire)
-// variant "dark"  = pour fond clair (le symbole a un fond noir, contraste avec la nav claire)
-const src = variant === "light" ? "/media/symbol-light.webp" : "/media/symbol-dark.webp";
+/**
+ * Symbole DO COM.
+ * variant "light" = destiné à un fond sombre · "dark" = destiné à un fond clair.
+ */
+const { variant = 'light', size = 36 } = Astro.props;
+const src = variant === 'light' ? '/media/symbol-light.webp' : '/media/symbol-dark.webp';
 ---
+
 <img
   src={src}
-  alt="DO COM"
+  alt=""
+  aria-hidden="true"
   width={size}
   height={size}
   loading="eager"
   decoding="async"
-  class="block rounded-[20%] select-none"
+  class="block rounded-lg select-none shrink-0"
   style={`width:${size}px;height:${size}px;`}
 />

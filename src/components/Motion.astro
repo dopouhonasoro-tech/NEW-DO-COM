@@ -1,0 +1,194 @@
+---
+/**
+ * Couche de mouvement du site.
+ *
+ * Trois responsabilités, une seule boucle d'animation :
+ *  1. Scroll fluide (Lenis) — désactivé si l'utilisateur réduit les animations.
+ *  2. Progression --p (0 → 1) sur chaque élément [data-progres].
+ *  3. Étape active des séquences épinglées, titres révélés, lueur de survol.
+ *
+ * Tout est inerte sans JavaScript : les scènes restent dans leur état final.
+ */
+---
+
+<script>
+  import Lenis from 'lenis';
+
+  const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pointeurFin = window.matchMedia('(pointer: fine)').matches;
+
+  const borne = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
+
+  const scenes = Array.from(document.querySelectorAll<HTMLElement>('[data-progres]'));
+  const sequences = Array.from(document.querySelectorAll<HTMLElement>('[data-sequence]'));
+
+  /* ------------------------------------------------------------------ */
+  /* Progression                                                         */
+  /* ------------------------------------------------------------------ */
+
+  /** Progression de 0 à 1 pendant la traversée de l'élément par la fenêtre. */
+  function progression(el: HTMLElement, mode: string): number {
+    const r = el.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    if (mode === 'sortie') {
+      // Pour un bloc déjà à l'écran au chargement (le héros) :
+      // 0 en haut de page, 1 quand le bloc a fini de sortir par le haut.
+      return borne(-r.top / Math.max(1, r.height));
+    }
+    if (mode === 'entree') {
+      // 0 quand le haut de l'élément touche le bas de l'écran,
+      // 1 quand il a remonté d'environ une hauteur d'écran.
+      return borne((vh - r.top) / (vh * 0.85));
+    }
+    // « traversee » : 0 quand l'élément entre par le bas, 1 quand il arrive au
+    // centre de l'écran — et non quand il en sort. La scène atteint donc son
+    // état rangé pendant qu'on la regarde, puis y reste.
+    return borne((vh - r.top) / ((vh + r.height) / 2));
+  }
+
+  function majScenes() {
+    for (const el of scenes) {
+      const r = el.getBoundingClientRect();
+      // Hors champ : rien à calculer.
+      if (r.bottom < -200 || r.top > window.innerHeight + 200) continue;
+      el.style.setProperty('--p', progression(el, el.dataset.progres || 'traversee').toFixed(4));
+    }
+  }
+
+  function majSequences() {
+    for (const seq of sequences) {
+      const etapes = Array.from(seq.querySelectorAll<HTMLElement>('.etape-seq'));
+      if (!etapes.length) continue;
+      const r = seq.getBoundingClientRect();
+      const course = r.height - window.innerHeight;
+      if (course <= 0) continue;
+      const p = borne(-r.top / course);
+      const actif = Math.min(etapes.length - 1, Math.floor(p * etapes.length));
+      etapes.forEach((e, i) =>
+        i === actif ? e.setAttribute('data-active', '') : e.removeAttribute('data-active')
+      );
+    }
+  }
+
+  function etatFinal() {
+    scenes.forEach((el) => el.style.setProperty('--p', '1'));
+    sequences.forEach((seq) =>
+      seq.querySelectorAll('.etape-seq').forEach((e) => e.setAttribute('data-active', ''))
+    );
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Boucle unique : Lenis + mise à jour des scènes                      */
+  /* ------------------------------------------------------------------ */
+  if (reduit) {
+    etatFinal();
+  } else {
+    // autoRaf explicitement désactivé : c'est notre boucle qui pilote Lenis,
+    // pour garantir que le scroll et les scènes sont calculés sur la même frame.
+    const lenis = new Lenis({
+      duration: 1.05,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      syncTouch: false, // sur mobile, l'inertie native reste la meilleure
+      autoRaf: false,
+    });
+
+    function boucle(temps: number) {
+      lenis.raf(temps);
+      rafraichir(); // second pilote, voir plus bas
+      requestAnimationFrame(boucle);
+    }
+    requestAnimationFrame(boucle);
+
+    // Deux pilotes indépendants appellent rafraichir() : la boucle
+    // d'animation et l'événement de défilement. L'un ou l'autre suffit.
+    // Cette redondance est voulue : requestAnimationFrame est suspendu dès
+    // qu'un onglet cesse d'être composé, et certains contextes n'émettent pas
+    // d'événement de défilement pour un défilement programmatique.
+    // Le garde-fou ci-dessous rend les appels en double sans effet.
+    let dernierCalcul = 0;
+    let dernierY = NaN;
+    let derniereHauteur = 0;
+
+    function rafraichir() {
+      const t = performance.now();
+      if (t - dernierCalcul < 16) return;
+      if (window.scrollY === dernierY && window.innerHeight === derniereHauteur) return;
+      dernierCalcul = t;
+      dernierY = window.scrollY;
+      derniereHauteur = window.innerHeight;
+      majScenes();
+      majSequences();
+    }
+
+    // Lenis émet pendant son inertie ; l'événement natif couvre le reste
+    // (molette sans inertie, clavier, barre de défilement, mobile).
+    lenis.on('scroll', rafraichir);
+    window.addEventListener('scroll', rafraichir, { passive: true });
+    window.addEventListener('resize', rafraichir, { passive: true });
+    rafraichir();
+
+    // Les ancres internes passent par Lenis pour conserver l'inertie.
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        const cible = document.querySelector(id);
+        if (!cible) return;
+        e.preventDefault();
+        lenis.scrollTo(cible as HTMLElement, { offset: -80 });
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Titres révélés ligne par ligne                                      */
+  /* ------------------------------------------------------------------ */
+  const titres = Array.from(document.querySelectorAll<HTMLElement>('.titre-anime'));
+
+  if (reduit) {
+    titres.forEach((t) => t.classList.add('animer'));
+  } else {
+    // Ceux déjà à l'écran au chargement s'animent immédiatement.
+    // setTimeout plutôt que requestAnimationFrame : le déclenchement ne doit pas
+    // dépendre du fait que l'onglet soit en train d'être composé.
+    titres.forEach((t) => {
+      if (t.getBoundingClientRect().top < window.innerHeight * 0.9) {
+        setTimeout(() => t.classList.add('animer'), 60);
+      }
+    });
+
+    const io = new IntersectionObserver(
+      (entrees) => {
+        entrees.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('animer');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+    );
+    titres.forEach((t) => {
+      if (!t.classList.contains('animer')) io.observe(t);
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Lueur de survol des cartes (souris uniquement)                      */
+  /* ------------------------------------------------------------------ */
+  if (pointeurFin && !reduit) {
+    document.querySelectorAll<HTMLElement>('.carte-lueur').forEach((carte) => {
+      carte.addEventListener(
+        'pointermove',
+        (ev) => {
+          const r = carte.getBoundingClientRect();
+          carte.style.setProperty('--sx', `${((ev.clientX - r.left) / r.width) * 100}%`);
+          carte.style.setProperty('--sy', `${((ev.clientY - r.top) / r.height) * 100}%`);
+        },
+        { passive: true }
+      );
+    });
+  }
+</script>

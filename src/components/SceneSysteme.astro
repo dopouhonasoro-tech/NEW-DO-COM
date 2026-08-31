@@ -1,0 +1,70 @@
+---
+/**
+ * Scène « du désordre au système ».
+ *
+ * Chaque fragment est placé à sa position FINALE (la grille ordonnée).
+ * Le désordre est un décalage --dx/--dy/--rot qui se résorbe quand --p
+ * passe de 0 à 1 au fil du défilement.
+ *
+ * Conséquence voulue : sans JavaScript, --p vaut 1 et la scène s'affiche
+ * rangée — l'état qui porte le message.
+ */
+
+// dx / dy sont exprimés en unités de fenêtre : le décalage reste proportionné
+// à l'écran, du mobile au grand format.
+const fragments = [
+  { label: 'Devis — WhatsApp',   col: 0, ligne: 0, dx: '-7vw',  dy: '-15vh', rot: '-13deg' },
+  { label: 'Suivi — Excel',      col: 1, ligne: 0, dx: '5vw',   dy: '-21vh', rot: '9deg' },
+  { label: 'Contrat — papier',   col: 2, ligne: 0, dx: '11vw',  dy: '-11vh', rot: '15deg' },
+  { label: 'Facture — e-mail',   col: 3, ligne: 0, dx: '6vw',   dy: '-18vh', rot: '-7deg' },
+  { label: 'Stock — cahier',     col: 0, ligne: 1, dx: '-12vw', dy: '14vh',  rot: '11deg' },
+  { label: 'Clients — carnet',   col: 1, ligne: 1, dx: '-4vw',  dy: '20vh',  rot: '-16deg' },
+  { label: 'Relances — mémoire', col: 2, ligne: 1, dx: '8vw',   dy: '16vh',  rot: '6deg' },
+  { label: 'Paiements — reçus',  col: 3, ligne: 1, dx: '13vw',  dy: '10vh',  rot: '-10deg' },
+];
+
+// Deux grilles finales : 4 colonnes × 2 lignes sur grand écran,
+// 2 colonnes × 4 lignes sur mobile — sinon les étiquettes se chevauchent.
+// La feuille de style choisit la paire de coordonnées selon la largeur.
+const xGrand = (col: number) => `${5 + col * 24}%`;
+const yGrand = (ligne: number) => `${34 + ligne * 26}%`;
+const xPetit = (i: number) => `${4 + (i % 2) * 50}%`;
+const yPetit = (i: number) => `${16 + Math.floor(i / 2) * 21}%`;
+---
+
+<div class="scene" data-progres="traversee">
+  <!-- Liens du système : tracés au fur et à mesure du rangement -->
+  <svg
+    class="scene-liens"
+    viewBox="0 0 100 100"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path pathLength="1" d="M 15 40 H 87" />
+    <path pathLength="1" d="M 15 66 H 87" />
+    <path pathLength="1" d="M 15 40 V 66" />
+    <path pathLength="1" d="M 39 40 V 66" />
+    <path pathLength="1" d="M 63 40 V 66" />
+    <path pathLength="1" d="M 87 40 V 66" />
+  </svg>
+
+  {
+    fragments.map((f, i) => (
+      <div
+        class="fragment"
+        style={`--xg:${xGrand(f.col)}; --yg:${yGrand(f.ligne)}; --xp:${xPetit(i)}; --yp:${yPetit(i)}; --dx:${f.dx}; --dy:${f.dy}; --rot:${f.rot};`}
+      >
+        <span class="pastille" />
+        {f.label}
+      </div>
+    ))
+  }
+
+  <!-- Les deux légendes se relaient au cours du rangement -->
+  <p class="legende-avant absolute left-0 top-0 eyebrow text-[color:var(--color-gris-sombre)]">
+    Aujourd’hui — huit endroits différents
+  </p>
+  <p class="legende-apres absolute left-0 top-0 eyebrow text-[color:var(--color-vert)]">
+    Après — un seul système
+  </p>
+</div>

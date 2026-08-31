@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SOLUTIONS, SITE } from '../../data/site';
+---
+
+<Layout
+  title="Solutions — transformation digitale, web, marketing, IA"
+  description="Six domaines : transformation digitale, sites web, marketing digital, contenus, IA et automatisation, solutions sur mesure. DO COM, Abidjan."
+  current="solutions"
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Solutions DO COM',
+      itemListElement: SOLUTIONS.map((s, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: s.titre,
+        url: `${SITE.url}/solutions/${s.slug}/`,
+      })),
+    },
+  ]}
+>
+  <PageHero
+    eyebrow="Solutions"
+    lede="Nous n’intervenons pas sur tout. Nous intervenons sur ce qui, dans une organisation, peut être digitalisé, automatisé ou simplifié — et sur ce qui permet ensuite de le faire savoir."
+  >
+    Six domaines,<br />
+    <span class="text-[color:var(--color-vert)]">une même logique.</span>
+  </PageHero>
+
+  <!-- Liste des solutions -->
+  <section class="sec-light py-16 md:py-24">
+    <div class="container-app">
+      <ol class="border-t hl-light" data-reveal-stagger>
+        {
+          SOLUTIONS.map((s) => (
+            <li>
+              <a
+                href={`/solutions/${s.slug}/`}
+                class="group grid md:grid-cols-12 gap-3 md:gap-8 py-8 md:py-11 border-b hl-light transition-colors hover:bg-[color:var(--color-papier)] -mx-4 px-4 md:-mx-6 md:px-6"
+              >
+                <span class="eyebrow text-[color:var(--color-vert-texte)] md:col-span-1 md:pt-2.5">
+                  {s.index}
+                </span>
+                <span class="md:col-span-4">
+                  <span class="h-lg block group-hover:text-[color:var(--color-vert-texte)] transition-colors">
+                    {s.titre}
+                  </span>
+                </span>
+                <span class="md:col-span-6 text-[color:var(--color-gris-clair)] leading-relaxed md:pt-2">
+                  {s.accroche}
+                </span>
+                <span
+                  class="md:col-span-1 text-[color:var(--color-vert-texte)] md:text-right md:pt-2 transition-transform group-hover:translate-x-1"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Verticalisation -->
+  <section class="sec-dark py-20 md:py-32 relative overflow-hidden">
+    <div class="grid-field" aria-hidden="true"></div>
+    <div class="glow-vert w-[28rem] h-[28rem] -bottom-40 -right-24" aria-hidden="true"></div>
+
+    <div class="container-app relative">
+      <SectionHead eyebrow="Verticalisation">
+        <h2 class="h-xl">
+          Quand un secteur revient,<br class="hidden md:inline" />
+          <span class="text-[color:var(--color-vert)]">nous en faisons une expertise.</span>
+        </h2>
+        <p class="lede text-[color:var(--color-gris-sombre)] max-w-2xl mt-6">
+          Digitaliser une organisation demande de comprendre son métier. Plutôt que de rester
+          généralistes partout, nous approfondissons les secteurs où nous accumulons de l’expérience
+          réelle.
+        </p>
+      </SectionHead>
+
+      <div class="mt-14 md:mt-20 grid lg:grid-cols-12 gap-8 lg:gap-16" data-reveal>
+        <div class="lg:col-span-5">
+          <p class="eyebrow text-[color:var(--color-vert)] mb-4">En construction</p>
+          <h3 class="h-lg mb-5">DO COM University&nbsp;OS</h3>
+          <p class="text-[color:var(--color-gris-sombre)] leading-relaxed">
+            Une approche de digitalisation des processus des universités privées, née de notre
+            travail en cours avec l’UFCI. Ce n’est pas un logiciel sur étagère : c’est une méthode
+            et un ensemble de composants que nous assemblons selon l’établissement.
+          </p>
+        </div>
+
+        <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+          <div class="card-dark carte-lueur p-7">
+            <p class="eyebrow text-[color:var(--color-gris-sombre)] mb-4">Composant</p>
+            <h4 class="h-md mb-3">Portail universitaire</h4>
+            <p class="text-sm text-[color:var(--color-gris-sombre)] leading-relaxed">
+              L’espace numérique de l’établissement et de ses utilisateurs. Périmètre défini avec
+              l’établissement, construit par paliers.
+            </p>
+          </div>
+          <div class="card-dark carte-lueur p-7">
+            <p class="eyebrow text-[color:var(--color-gris-sombre)] mb-4">Composant distinct</p>
+            <h4 class="h-md mb-3">Bibliothèque numérique</h4>
+            <p class="text-sm text-[color:var(--color-gris-sombre)] leading-relaxed">
+              Un fonds documentaire consultable par les utilisateurs authentifiés, avec des
+              protections en couches contre l’extraction et la diffusion.
+            </p>
+          </div>
+          <div class="sm:col-span-2 border border-[color:var(--color-filet-sombre)] rounded-xl p-7">
+            <p class="eyebrow text-[color:var(--color-vert)] mb-3">Ce que nous disons aux établissements</p>
+            <p class="text-sm text-[color:var(--color-gris-sombre)] leading-relaxed">
+              Aucune plateforme au monde ne peut empêcher une capture d’écran ou la photo d’un écran
+              — c’est une fonction du système d’exploitation, hors de portée d’un site. Ce qui est
+              réellement possible : empêcher le téléchargement du fichier d’origine, bloquer
+              l’impression et la copie, rendre l’extraction massive impraticable, et identifier
+              chaque lecteur par un filigrane personnel. Tout prestataire qui vous promet
+              « inviolable » se trompe ou vous trompe.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12" data-reveal>
+        <a href="/realisations/#ufci" class="btn btn-ghost-light">
+          Voir le projet UFCI <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    titre="Vous ne savez pas dans quelle case vous entrez ?"
+    texte="C’est fréquent, et ce n’est pas un problème. Décrivez votre situation en quelques lignes : nous vous dirons quel domaine s’applique, ou si personne chez nous n’est le bon interlocuteur."
+  />
+</Layout>

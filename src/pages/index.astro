@@ -1,374 +1,458 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import TitreAnime from '../components/TitreAnime.astro';
+import SceneSysteme from '../components/SceneSysteme.astro';
+import { SOLUTIONS, PROCESSUS, SITE } from '../data/site';
+
+const frictions = [
+  { titre: 'Des tâches refaites à la main', texte: 'Les mêmes informations saisies deux ou trois fois, dans deux ou trois outils.' },
+  { titre: 'Des informations dispersées', texte: 'Un devis dans WhatsApp, un suivi dans Excel, un contrat dans une boîte mail.' },
+  { titre: 'Des outils qui ne se parlent pas', texte: 'Chaque logiciel résout un bout du problème et crée du travail de raccordement.' },
+  { titre: 'Des opérations qui ne tiennent pas la montée en charge', texte: 'Ce qui fonctionne à dix dossiers par mois casse à cent.' },
+];
+
+const differences = [
+  {
+    titre: 'On commence par le problème, jamais par la technologie',
+    texte:
+      'Le diagnostic précède toujours la proposition. Si votre besoin ne justifie pas un développement, nous vous le disons — quitte à vendre moins.',
+  },
+  {
+    titre: 'On écrit les limites avant le devis',
+    texte:
+      'Ce qui est techniquement impossible est dit avant la signature, pas découvert à la livraison. Cette règle nous a déjà coûté des projets. Elle reste.',
+  },
+  {
+    titre: 'On livre par paliers utilisables',
+    texte:
+      'Vous voyez quelque chose fonctionner tôt, et l’usage réel dicte la suite. Pas de projet tunnel où tout arrive à la fin, ou n’arrive jamais.',
+  },
+  {
+    titre: 'On construit pour le contexte local',
+    texte:
+      'Connexions mobiles irrégulières, paiement par Wave et Orange Money, WhatsApp comme canal principal. Ce sont des contraintes de conception, pas des détails.',
+  },
+  {
+    titre: 'L’IA employée là où elle sert',
+    texte:
+      'Beaucoup de problèmes se résolvent par une automatisation simple et prévisible. Nous mobilisons un modèle quand la tâche le justifie, pas pour l’argument commercial.',
+  },
+  {
+    titre: 'L’outil vous appartient',
+    texte:
+      'Code, accès, comptes administrateurs, documentation. Vous restez capables d’exploiter et de faire évoluer ce que nous construisons, avec ou sans nous.',
+  },
+];
+
+const commercial = [
+  { num: '01', texte: 'Vous nous décrivez votre situation, en quelques lignes.' },
+  { num: '02', texte: 'Nous analysons votre besoin et revenons vers vous sous 24 h ouvrées.' },
+  { num: '03', texte: 'Nous définissons ensemble la meilleure approche, écrite et chiffrée.' },
+  { num: '04', texte: 'Nous construisons la solution, par paliers que vous validez.' },
+  { num: '05', texte: 'Nous vous accompagnons dans son usage et son évolution.' },
+];
 ---
 
-<Layout current="accueil" navTheme="dark">
+<Layout
+  title="Transformation digitale et IA en Côte d’Ivoire — DO COM"
+  rawTitle
+  description="DO COM transforme l’activité des entreprises grâce au digital, au marketing et à l’IA. Agence de transformation digitale à Abidjan, Côte d’Ivoire."
+  current="accueil"
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'DO COM',
+      url: SITE.url,
+      inLanguage: 'fr',
+    },
+  ]}
+>
+  <!-- ============================ HERO ============================ -->
+  <section
+    class="sec-dark relative overflow-hidden min-h-[92svh] flex items-center"
+    data-progres="sortie"
+    style="--p:0"
+  >
+    <div class="grid-field grille-scroll" aria-hidden="true"></div>
+    <div class="glow-vert parallaxe-halo w-[42rem] h-[42rem] -top-56 -right-40" aria-hidden="true">
+    </div>
 
-  <!-- ==================== HERO VIDEO + PARALLAXE ==================== -->
-  <section class="relative min-h-[94vh] flex items-end overflow-hidden -mt-16 md:-mt-20 pt-16 md:pt-20" data-parallax-scene>
-    <video
-      class="hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      poster="/media/logo.webp"
+    <div class="container-app relative pt-28 pb-20 md:pt-36 md:pb-28 w-full">
+      <p class="eyebrow text-[color:var(--color-vert)] mb-7 animate-in">
+        DO COM — {SITE.signature}
+      </p>
+
+      <TitreAnime
+        niveau="h1"
+        taille="h-mega"
+        class="max-w-[15ch]"
+        lignes={[
+          { texte: 'Votre organisation avance.' },
+          { texte: 'Vos outils la freinent.', accent: true },
+        ]}
+      />
+
+      <p
+        class="lede text-[color:var(--color-gris-sombre)] max-w-2xl mt-8 md:mt-10 animate-in"
+        style="animation-delay:420ms"
+      >
+        Nous analysons la façon dont votre activité fonctionne réellement, puis nous concevons les
+        systèmes digitaux qui l’allègent : plateformes, sites, contenus, campagnes, automatisations.
+        La technologie n’est jamais le point de départ — le problème l’est.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 mt-10 animate-in" style="animation-delay:530ms">
+        <a href="/contact/" class="btn btn-vert">
+          Parlons de votre projet <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="/approche/" class="btn btn-ghost-light">Découvrir notre approche</a>
+      </div>
+
+      <dl
+        class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 mt-16 md:mt-24 pt-8 border-t hl-dark animate-in max-w-4xl"
+        style="animation-delay:640ms"
+      >
+        <div>
+          <dt class="eyebrow text-[color:var(--color-gris-sombre)] mb-2">Basés à</dt>
+          <dd class="font-display text-lg font-semibold">{SITE.ville}, {SITE.pays}</dd>
+        </div>
+        <div>
+          <dt class="eyebrow text-[color:var(--color-gris-sombre)] mb-2">Marchés</dt>
+          <dd class="font-display text-lg font-semibold">Afrique francophone</dd>
+        </div>
+        <div>
+          <dt class="eyebrow text-[color:var(--color-gris-sombre)] mb-2">Domaines</dt>
+          <dd class="font-display text-lg font-semibold">6 solutions</dd>
+        </div>
+        <div>
+          <dt class="eyebrow text-[color:var(--color-gris-sombre)] mb-2">Réponse</dt>
+          <dd class="font-display text-lg font-semibold">Sous 24 h ouvrées</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3"
+      aria-hidden="true"
     >
-      <source src="/media/hero.mp4" type="video/mp4" />
-    </video>
-    <div class="hero-overlay"></div>
-
-    <!-- Orbes de profondeur -->
-    <div class="orb-field" aria-hidden="true">
-      <div class="orb orb-emeraude orb-a w-[38rem] h-[38rem] -top-40 -right-40"></div>
-      <div class="orb orb-deep orb-b w-[28rem] h-[28rem] bottom-0 -left-32"></div>
-    </div>
-
-    <div class="container-app relative z-10 pb-16 md:pb-24 pt-10">
-      <div class="max-w-5xl">
-        <div class="inline-flex items-center gap-2.5 glass-dark !rounded-full px-4 py-2 mb-8 animate-in" style="animation-delay: 80ms" data-parallax-layer="6">
-          <span class="w-2 h-2 rounded-full bg-[color:var(--color-emeraude-glow)] animate-pulse"></span>
-          <span class="text-xs tracking-wide text-[color:var(--color-ivoire)]/85">Réponse humaine sous 24 h · Abidjan → Afrique & Europe francophone</span>
-        </div>
-
-        <h1 class="h-mega mb-8 animate-in" style="animation-delay: 220ms" data-parallax-layer="12">
-          Voir plus loin.<br/>
-          <span class="serif-em text-[color:var(--color-emeraude-glow)]">Vendre plus, dès ce trimestre.</span>
-        </h1>
-
-        <p class="text-lg md:text-xl max-w-2xl leading-relaxed text-[color:var(--color-ivoire)]/85 mb-10 animate-in" style="animation-delay: 380ms" data-parallax-layer="18">
-          La plupart des agences vous vendent de la visibilité. Nous, on s'engage sur ce qui vous fait vivre : <span class="serif-em text-[color:var(--color-emeraude-glow)]">des contacts, des ventes, des chiffres réels</span> — publiés dans votre rapport chaque mois.
-        </p>
-
-        <div class="flex flex-wrap gap-4 animate-in" style="animation-delay: 520ms" data-parallax-layer="24">
-          <a href="/contact/" class="btn-emeraude glow-ring" data-magnetic>
-            Réserver un diagnostic gratuit
-            <span class="arrow" aria-hidden="true">→</span>
-          </a>
-          <a href="/services/" class="btn-line-light" data-magnetic>Voir nos 3 expertises</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Scroll cue -->
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-[color:var(--color-ivoire)]/60 text-xs tracking-widest uppercase hidden md:flex flex-col items-center gap-2">
-      <span>Défiler</span>
-      <span class="w-px h-8 bg-[color:var(--color-ivoire)]/40 relative overflow-hidden">
-        <span class="absolute top-0 left-0 w-full h-1/2 bg-[color:var(--color-emeraude-glow)] animate-pulse"></span>
-      </span>
+      <span class="eyebrow text-[color:var(--color-gris-sombre)] text-[10px]">Défiler</span>
+      <span class="indice-scroll"></span>
     </div>
   </section>
 
-  <!-- ==================== STATS BAND (compteurs) ==================== -->
-  <section class="sec-dark border-y hl-dark relative overflow-hidden">
-    <div class="container-app py-12 grid grid-cols-2 md:grid-cols-4 gap-8" data-reveal-stagger>
-      <div>
-        <div class="font-display text-4xl md:text-5xl leading-none mb-2"><span data-count="3">0</span></div>
-        <div class="text-xs text-[color:var(--color-gris-cool)] uppercase tracking-widest">Expertises, aucune dispersion</div>
-      </div>
-      <div>
-        <div class="font-display text-4xl md:text-5xl leading-none mb-2"><span data-count="5">0</span><span class="text-emeraude-glow">+</span></div>
-        <div class="text-xs text-[color:var(--color-gris-cool)] uppercase tracking-widest">Structures accompagnées</div>
-      </div>
-      <div>
-        <div class="font-display text-4xl md:text-5xl leading-none mb-2"><span data-count="24">0</span><span class="text-emeraude-glow">h</span></div>
-        <div class="text-xs text-[color:var(--color-gris-cool)] uppercase tracking-widest">Un humain vous répond</div>
-      </div>
-      <div>
-        <div class="font-display text-4xl md:text-5xl leading-none mb-2"><span data-count="100">0</span><span class="text-emeraude-glow">%</span></div>
-        <div class="text-xs text-[color:var(--color-gris-cool)] uppercase tracking-widest">Chiffres réels dans vos rapports</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== LE VRAI PROBLÈME ==================== -->
-  <section class="sec-light py-24 md:py-36 relative overflow-hidden">
-    <div class="container-app">
-      <div class="grid md:grid-cols-12 gap-8 mb-16" data-reveal>
-        <div class="md:col-span-4">
-          <div class="eyebrow text-emeraude mb-4">Le vrai problème</div>
-        </div>
-        <div class="md:col-span-8">
-          <h2 class="h-xl text-[color:var(--color-encre)]">
-            Vous avez déjà payé<br/>
-            pour du marketing qui<br/>
-            <span class="serif-em text-emeraude">n'a rien rapporté.</span>
-          </h2>
-        </div>
+  <!-- ============ SCÈNE : DU DÉSORDRE AU SYSTÈME ============ -->
+  <section class="sec-dark relative overflow-hidden border-y hl-dark py-16 md:py-24">
+    <div class="container-app relative">
+      <div class="max-w-2xl mb-10 md:mb-14" data-reveal>
+        <p class="eyebrow text-[color:var(--color-vert)] mb-5">Ce que nous faisons</p>
+        <TitreAnime
+          lignes={[{ texte: 'Nous rangeons ce qui' }, { texte: 'vous ralentit.', accent: true }]}
+          taille="h-xl"
+        />
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6" data-reveal-stagger>
-        <div class="card-light p-8" data-tilt>
-          <div class="font-display text-5xl text-[color:var(--color-line-light)] mb-6">01</div>
-          <div class="font-medium text-lg mb-3 text-[color:var(--color-encre)]">Des posts, mais pas de clients</div>
-          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">On vous a vendu des publications, des likes, de la "visibilité". Votre chiffre d'affaires, lui, n'a pas bougé. Ce n'était pas du marketing — c'était de l'animation.</p>
-        </div>
-        <div class="card-light p-8" data-tilt>
-          <div class="font-display text-5xl text-[color:var(--color-line-light)] mb-6">02</div>
-          <div class="font-medium text-lg mb-3 text-[color:var(--color-encre)]">Des rapports incompréhensibles</div>
-          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Impressions, reach, engagement… mais jamais la seule ligne qui compte : combien ça a coûté, combien ça a rapporté. Si votre agence ne vous la montre pas, c'est qu'elle n'ose pas.</p>
-        </div>
-        <div class="card-light p-8" data-tilt>
-          <div class="font-display text-5xl text-[color:var(--color-line-light)] mb-6">03</div>
-          <div class="font-medium text-lg mb-3 text-[color:var(--color-encre)]">Une agence qui dit oui à tout</div>
-          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Site, logo, réseaux, flyers, événementiel… la même équipe qui fait "tout" ne peut être excellente nulle part. Vous payez le prix d'un spécialiste pour un résultat de généraliste.</p>
-        </div>
-      </div>
+      <SceneSysteme />
 
-      <div class="mt-14 text-center" data-reveal>
-        <p class="text-lg text-[color:var(--color-gris-warm)] max-w-2xl mx-auto">
-          Si vous vous reconnaissez dans une seule de ces situations,<br class="hidden md:block"/>
-          <span class="serif-em text-emeraude text-xl">les 30 prochaines secondes de lecture vont vous intéresser.</span>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 3 PILIERS (dark + tilt) ==================== -->
-  <section class="sec-dark py-24 md:py-36 relative overflow-hidden">
-    <div class="orb-field" aria-hidden="true">
-      <div class="orb orb-deep orb-a w-[32rem] h-[32rem] top-20 -right-40"></div>
-    </div>
-
-    <div class="container-app relative z-10">
-      <div class="grid md:grid-cols-12 gap-8 mb-16 md:mb-20" data-reveal>
-        <div class="md:col-span-4">
-          <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-4">Notre réponse</div>
-        </div>
-        <div class="md:col-span-8">
-          <h2 class="h-xl">
-            Trois expertises.<br/>
-            <span class="serif-em text-[color:var(--color-emeraude-glow)]">Zéro dispersion.</span>
-          </h2>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6" data-reveal-stagger>
-        <a href="/services/#publicite" class="card-dark p-8 md:p-10 group block" data-tilt>
-          <div class="text-sm font-mono text-[color:var(--color-emeraude-glow)] mb-6">01 / Growth</div>
-          <h3 class="font-display text-2xl md:text-[1.7rem] leading-tight mb-4">Publicité digitale <span class="serif-em">& growth</span></h3>
-          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed mb-8">
-            Meta, Google, TikTok Ads. Chaque franc dépensé se justifie par un résultat mesuré : leads, ventes, coût d'acquisition. Pilotage quotidien, rapport mensuel réel.
-          </p>
-          <span class="inline-flex items-center gap-2 text-[color:var(--color-emeraude-glow)] text-sm font-medium group-hover:gap-3.5 transition-all">
-            Découvrir <span aria-hidden="true">→</span>
-          </span>
-        </a>
-
-        <a href="/services/#audit" class="card-dark p-8 md:p-10 group block" data-tilt>
-          <div class="text-sm font-mono text-[color:var(--color-emeraude-glow)] mb-6">02 / Stratégie</div>
-          <h3 class="font-display text-2xl md:text-[1.7rem] leading-tight mb-4">Audit <span class="serif-em">& conseil stratégique</span></h3>
-          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed mb-8">
-            Un regard extérieur structuré sur votre funnel, votre positionnement, vos dépenses. Livrable clair, priorités classées. Pas de PowerPoint pour PowerPoint.
-          </p>
-          <span class="inline-flex items-center gap-2 text-[color:var(--color-emeraude-glow)] text-sm font-medium group-hover:gap-3.5 transition-all">
-            Découvrir <span aria-hidden="true">→</span>
-          </span>
-        </a>
-
-        <a href="/services/#site" class="card-dark p-8 md:p-10 group block" data-tilt>
-          <div class="text-sm font-mono text-[color:var(--color-emeraude-glow)] mb-6">03 / Site</div>
-          <h3 class="font-display text-2xl md:text-[1.7rem] leading-tight mb-4">Création <span class="serif-em">de site web</span></h3>
-          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed mb-8">
-            Sites rapides, mesurables, pensés conversion — pas des vitrines décoratives. Stack moderne (Astro, Netlify), chaque page a un objectif et un tracking.
-          </p>
-          <span class="inline-flex items-center gap-2 text-[color:var(--color-emeraude-glow)] text-sm font-medium group-hover:gap-3.5 transition-all">
-            Découvrir <span aria-hidden="true">→</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== COMPARATIF : POURQUOI NOUS ==================== -->
-  <section class="sec-light py-24 md:py-36">
-    <div class="container-app">
-      <div class="max-w-3xl mb-16" data-reveal>
-        <div class="eyebrow text-emeraude mb-4">La différence</div>
-        <h2 class="h-xl text-[color:var(--color-encre)]">
-          Ce que vous achetez,<br/>
-          <span class="serif-em text-emeraude">vraiment.</span>
-        </h2>
-      </div>
-
-      <div class="rounded-2xl border hl-light overflow-hidden" data-reveal>
-        <!-- header (desktop) -->
-        <div class="vs-row border-b hl-light bg-[color:var(--color-ivoire-soft)] hidden md:grid">
-          <div class="p-5 md:p-6"></div>
-          <div class="p-5 md:p-6 text-sm font-medium text-[color:var(--color-gris-warm)]">Une agence classique</div>
-          <div class="p-5 md:p-6 text-sm font-semibold text-emeraude flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[color:var(--color-emeraude)]"></span> DO COM
-          </div>
-        </div>
-
-        {[
-          {
-            k: "Ce qu'on vous vend",
-            a: "Des posts, des likes, de la « visibilité »",
-            b: "Des contacts et des ventes, mesurés chaque mois",
-          },
-          {
-            k: "Le rapport mensuel",
-            a: "Des impressions et du reach, jamais le coût par résultat",
-            b: "Dépense, résultats, coût par résultat — les chiffres réels",
-          },
-          {
-            k: "Le périmètre",
-            a: "« On fait tout » — donc rien d'excellent",
-            b: "3 expertises seulement, travaillées à fond",
-          },
-          {
-            k: "Quand ça ne marche pas",
-            a: "On change de sujet, on relance un devis",
-            b: "On vous le dit dans le rapport, avec un plan de correction — ou un arrêt",
-          },
-          {
-            k: "L'engagement",
-            a: "Reconduction tacite, mensualités qui s'installent",
-            b: "Vous re-signez uniquement si les chiffres le justifient",
-          },
-        ].map((row, i) => (
-          <div class:list={["vs-row", i < 4 && "border-b hl-light"]}>
-            <div class="p-5 md:p-6 text-sm font-semibold text-[color:var(--color-encre)] bg-[color:var(--color-ivoire-soft)] md:bg-transparent">{row.k}</div>
-            <div class="p-5 md:p-6 text-sm text-[color:var(--color-gris-warm)] leading-relaxed">
-              <span class="md:hidden block text-[10px] uppercase tracking-[0.2em] mb-1.5 text-[color:var(--color-gris-cool)]">Agence classique</span>
-              {row.a}
-            </div>
-            <div class="p-5 md:p-6 text-sm text-[color:var(--color-encre)] leading-relaxed font-medium bg-[color:var(--color-emeraude)]/[0.04]">
-              <span class="md:hidden block text-[10px] uppercase tracking-[0.2em] mb-1.5 text-emeraude">DO COM</span>
-              {row.b}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <p class="mt-10 text-center text-[color:var(--color-gris-warm)]" data-reveal>
-        Nous ne connaissons aucune autre agence sur nos marchés qui accepte de mettre <span class="serif-em text-emeraude">son coût par résultat</span> noir sur blanc dans le rapport client. C'est notre pari — et votre garantie.
+      <p class="text-[color:var(--color-gris-sombre)] max-w-xl mt-10 md:mt-14 text-sm leading-relaxed" data-reveal>
+        Rien n’est supprimé au passage : chaque information garde sa place, mais une seule. C’est
+        généralement là que se trouvent les heures que vous cherchiez.
       </p>
     </div>
   </section>
 
-  <!-- ==================== POSITIONNEMENT ==================== -->
-  <section class="sec-dark py-24 md:py-36 relative overflow-hidden">
-    <div class="orb-field" aria-hidden="true">
-      <div class="orb orb-emeraude orb-b w-[26rem] h-[26rem] -bottom-20 -left-24"></div>
+  <!-- ==================== TRANSFORMATION DIGITALE ==================== -->
+  <section class="sec-light py-20 md:py-32">
+    <div class="container-app">
+      <SectionHead eyebrow="Le point de départ" tone="light">
+        <TitreAnime
+          ton="light"
+          lignes={[
+            { texte: 'Avant d’être un problème de technologie,' },
+            { texte: 'c’est un problème d’organisation.', accent: true },
+          ]}
+        />
+        <p class="lede text-[color:var(--color-gris-clair)] max-w-2xl mt-6">
+          La plupart des organisations que nous rencontrons n’ont pas besoin d’un outil de plus.
+          Elles ont besoin que l’information cesse de se perdre entre les outils qu’elles ont déjà.
+        </p>
+      </SectionHead>
+
+      <div class="grid md:grid-cols-2 gap-x-10 gap-y-8 mt-14 md:mt-20" data-reveal-stagger>
+        {
+          frictions.map((f, i) => (
+            <div class="step step-light">
+              <p class="eyebrow text-[color:var(--color-vert-texte)] mb-3">
+                {String(i + 1).padStart(2, '0')}
+              </p>
+              <h3 class="h-md mb-2.5">{f.titre}</h3>
+              <p class="text-[color:var(--color-gris-clair)] leading-relaxed">{f.texte}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-16 md:mt-24 rounded-xl border hl-light overflow-hidden" data-reveal>
+        <div class="ba-row">
+          <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r hl-light">
+            <p class="eyebrow text-[color:var(--color-gris-clair)] mb-5">Ce que nous analysons</p>
+            <ul class="space-y-3.5 text-[color:var(--color-gris-clair)]">
+              <li class="rule-accent">Le parcours réel d’un dossier, du premier contact à l’archivage</li>
+              <li class="rule-accent">Les endroits où le travail attend une validation ou une information</li>
+              <li class="rule-accent">Les tâches répétées quotidiennement sans valeur de jugement</li>
+              <li class="rule-accent">Ce que coûte, en temps, chacune de ces frictions</li>
+            </ul>
+          </div>
+          <div class="p-8 md:p-12 bg-[color:var(--color-papier)]">
+            <p class="eyebrow text-[color:var(--color-vert-texte)] mb-5">Ce que nous en tirons</p>
+            <ul class="space-y-3.5 text-[color:var(--color-gris-clair)]">
+              <li class="rule-accent">Ce qui doit être <strong class="text-[color:var(--color-noir)]">digitalisé</strong> — et dans quel ordre</li>
+              <li class="rule-accent">Ce qui peut être <strong class="text-[color:var(--color-noir)]">automatisé</strong> sans risque</li>
+              <li class="rule-accent">Ce qui doit être <strong class="text-[color:var(--color-noir)]">centralisé</strong> en un seul endroit</li>
+              <li class="rule-accent">Ce qu’il faut <strong class="text-[color:var(--color-noir)]">supprimer</strong> plutôt qu’informatiser</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="container-app grid md:grid-cols-12 gap-16 items-start relative z-10">
-      <div class="md:col-span-5" data-reveal="left">
-        <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-6">Positionnement</div>
-        <h2 class="h-xl mb-8">
-          Nous avons choisi<br/>
-          de ne <span class="serif-em text-[color:var(--color-emeraude-glow)]">pas</span> tout faire.
+  </section>
+
+  <!-- ============================ SOLUTIONS ============================ -->
+  <section class="sec-dark py-20 md:py-32 relative overflow-hidden">
+    <div class="glow-vert w-[30rem] h-[30rem] top-20 -left-40" aria-hidden="true"></div>
+
+    <div class="container-app relative">
+      <SectionHead eyebrow="Solutions">
+        <h2 class="h-xl">
+          Six domaines.<br />
+          <span class="text-[color:var(--color-vert)]">Un seul objectif : que ça produise.</span>
         </h2>
-      </div>
-      <div class="md:col-span-7 space-y-6 text-lg leading-relaxed text-[color:var(--color-ivoire)]/85" data-reveal>
-        <p>
-          La plupart des agences vendent une dizaine de services parce que refuser un client fait peur. Résultat : personne ne devient vraiment excellent nulle part, et le client paye pour de la moyenne.
+        <p class="lede text-[color:var(--color-gris-sombre)] max-w-2xl mt-6">
+          Chaque domaine répond à un problème identifié, pas à une case à cocher dans un catalogue de
+          services.
         </p>
-        <p>
-          DO COM s'est recentrée sur trois expertises — celles où nous avons un vrai avantage opérationnel : accès direct aux plateformes Meta / Google / TikTok, méthodologie de conseil éprouvée, stack technique moderne pour livrer des sites rapides et rentables à opérer.
-        </p>
-        <p class="text-[color:var(--color-ivoire)]">
-          Si votre besoin sort de ces trois piliers, <span class="serif-em text-[color:var(--color-emeraude-glow)]">nous vous le dirons</span> — et nous vous orienterons vers quelqu'un qui saura vraiment le faire.
-        </p>
+      </SectionHead>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-14 md:mt-20" data-reveal-stagger>
+        {
+          SOLUTIONS.map((s) => (
+            <a href={`/solutions/${s.slug}/`} class="card-dark carte-lueur p-7 md:p-8 flex flex-col group">
+              <p class="eyebrow text-[color:var(--color-vert)] mb-6">{s.index}</p>
+              <h3 class="h-md mb-3">{s.titre}</h3>
+              <p class="text-sm text-[color:var(--color-gris-sombre)] leading-relaxed grow">
+                {s.accroche}
+              </p>
+              <span class="inline-flex items-center gap-2 text-sm text-[color:var(--color-vert)] mt-7 font-medium">
+                En savoir plus
+                <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">
+                  →
+                </span>
+              </span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
 
-  <!-- ==================== CLIENTS MARQUEE ==================== -->
-  <section class="sec-light py-16 border-t hl-light">
-    <div class="container-app mb-10">
-      <div class="eyebrow text-emeraude text-center">Ils nous ont fait confiance</div>
-    </div>
-    <div class="marquee">
-      <div class="marquee-track font-display text-3xl md:text-5xl text-[color:var(--color-encre)]/70">
-        <span>STRANINVEST</span><span class="text-emeraude">·</span>
-        <span class="serif-em">WK Multi Services</span><span class="text-emeraude">·</span>
-        <span>SOS Hépatites CI</span><span class="text-emeraude">·</span>
-        <span class="serif-em">Dr Doba Soro</span><span class="text-emeraude">·</span>
-        <span>MAD Training</span><span class="text-emeraude">·</span>
-        <span>STRANINVEST</span><span class="text-emeraude">·</span>
-        <span class="serif-em">WK Multi Services</span><span class="text-emeraude">·</span>
-        <span>SOS Hépatites CI</span><span class="text-emeraude">·</span>
-        <span class="serif-em">Dr Doba Soro</span><span class="text-emeraude">·</span>
-        <span>MAD Training</span><span class="text-emeraude">·</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== RÉALISATIONS CARDS ==================== -->
-  <section class="sec-light pb-24 md:pb-36">
+  <!-- ============ APPROCHE — SÉQUENCE ÉPINGLÉE ============ -->
+  <section class="sec-paper py-20 md:pt-32 md:pb-0">
     <div class="container-app">
-      <div class="grid md:grid-cols-3 gap-6" data-reveal-stagger>
-        <div class="card-light p-8" data-tilt>
-          <div class="eyebrow text-emeraude mb-4">Groupe holding · 5 entités</div>
-          <div class="font-display text-2xl mb-3 text-[color:var(--color-encre)]">STRANINVEST</div>
-          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Communication corporate — point d'entrée vers une gestion de communication complète du groupe.</p>
-        </div>
-        <div class="card-light p-8" data-tilt>
-          <div class="eyebrow text-emeraude mb-4">TPE · Motos & après-vente</div>
-          <div class="font-display text-2xl mb-3 text-[color:var(--color-encre)]">WK Multi Services</div>
-          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Stratégie digitale pilotée par KPI — 300K → 700K FCFA de revenu mensuel projeté sur 3 mois.</p>
-        </div>
-        <div class="card-light p-8" data-tilt>
-          <div class="eyebrow text-emeraude mb-4">OSC · Cabinet médical</div>
-          <div class="font-display text-2xl mb-3 text-[color:var(--color-encre)]">SOS Hépatites CI · Dr Doba Soro</div>
-          <p class="text-sm text-[color:var(--color-gris-warm)] leading-relaxed">Sites institutionnels livrés — présence digitale professionnelle pour un secteur exigeant.</p>
-        </div>
-      </div>
+      <SectionHead eyebrow="Notre approche" tone="light">
+        <TitreAnime
+          ton="light"
+          lignes={[
+            { texte: 'Nous ne commençons jamais' },
+            { texte: 'par la technologie.', accent: true },
+          ]}
+        />
+        <p class="lede text-[color:var(--color-gris-clair)] max-w-2xl mt-6">
+          Six étapes, dans cet ordre. Les trois premières coûtent du temps et évitent de construire
+          la mauvaise chose — c’est la partie que la plupart des prestataires sautent.
+        </p>
+      </SectionHead>
+    </div>
 
-      <div class="text-center mt-12">
-        <a href="/realisations/" class="btn-line-dark" data-magnetic>Voir toutes les réalisations</a>
+    <!-- Sur grand écran, les étapes défilent une à une pendant que le titre reste fixe. -->
+    <div class="container-app" data-sequence>
+      <div class="lg:grid lg:grid-cols-12 lg:gap-16 mt-14 md:mt-20">
+        <div class="hidden lg:block lg:col-span-4">
+          <div class="sequence-colonne pt-32 pb-32">
+            <p class="eyebrow text-[color:var(--color-vert-texte)] mb-5">La méthode</p>
+            <p class="h-lg mb-8">Six étapes, jamais dans le désordre.</p>
+            <a href="/approche/" class="btn btn-ghost-dark">
+              Voir le détail <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <ol class="lg:col-span-8 lg:py-32">
+          {
+            PROCESSUS.map((p) => (
+              <li class="etape-seq py-8 lg:py-12">
+                <div class="barre mb-6" />
+                <p class="eyebrow text-[color:var(--color-vert-texte)] mb-3">{p.num}</p>
+                <h3 class="h-lg mb-3">{p.titre}</h3>
+                <p class="text-[color:var(--color-gris-clair)] leading-relaxed max-w-xl">
+                  {p.texte}
+                </p>
+              </li>
+            ))
+          }
+        </ol>
       </div>
     </div>
-  </section>
 
-  <!-- ==================== ENGAGEMENTS ==================== -->
-  <section class="sec-dark py-24 md:py-32 border-t hl-dark">
-    <div class="container-app">
-      <div class="max-w-3xl mb-14" data-reveal>
-        <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-4">Sans risque pour vous</div>
-        <h2 class="h-lg">Trois engagements, <span class="serif-em text-[color:var(--color-emeraude-glow)]">écrits noir sur blanc.</span></h2>
-      </div>
-      <div class="grid md:grid-cols-3 gap-6" data-reveal-stagger>
-        <div class="glass-dark p-8" data-tilt>
-          <div class="font-display text-3xl text-[color:var(--color-emeraude-glow)] mb-4">①</div>
-          <div class="font-medium mb-2">Le diagnostic est gratuit — et utile</div>
-          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed">45 min d'appel, 3 recommandations concrètes à emporter. Même si vous ne signez jamais avec nous.</p>
-        </div>
-        <div class="glass-dark p-8" data-tilt>
-          <div class="font-display text-3xl text-[color:var(--color-emeraude-glow)] mb-4">②</div>
-          <div class="font-medium mb-2">Les chiffres réels, chaque mois</div>
-          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed">Dépense, résultats, coût par résultat. Si une campagne déçoit, c'est écrit dans le rapport — avec le plan de correction.</p>
-        </div>
-        <div class="glass-dark p-8" data-tilt>
-          <div class="font-display text-3xl text-[color:var(--color-emeraude-glow)] mb-4">③</div>
-          <div class="font-medium mb-2">Aucune reconduction tacite</div>
-          <p class="text-sm text-[color:var(--color-gris-cool)] leading-relaxed">Chaque mission a un début, une fin, un livrable. Vous re-signez si — et seulement si — les résultats le justifient.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== CTA FINAL ==================== -->
-  <section class="sec-emeraude relative overflow-hidden">
-    <div class="orb-field" aria-hidden="true">
-      <div class="orb orb-ivoire orb-a w-[30rem] h-[30rem] -top-32 right-0"></div>
-    </div>
-    <div class="container-narrow py-24 md:py-32 text-center relative z-10" data-reveal>
-      <div class="eyebrow text-[color:var(--color-ivoire)]/70 mb-6">Prêt à voir plus loin ?</div>
-      <h2 class="h-xl mb-8 text-[color:var(--color-ivoire)]">
-        45 minutes pour comprendre<br/>
-        où votre marketing perd<br/>
-        <span class="serif-em">du temps et de l'argent.</span>
-      </h2>
-      <p class="max-w-2xl mx-auto mb-12 leading-relaxed text-[color:var(--color-ivoire)]/85">
-        Un appel de diagnostic gratuit, sans engagement. Vous repartez avec 3 recommandations concrètes, que vous décidiez ou non de travailler avec nous.
-      </p>
-      <a href="/contact/" class="inline-flex items-center justify-center gap-2 bg-[color:var(--color-ivoire)] text-[color:var(--color-encre)] font-medium px-8 py-4 rounded-full hover:bg-white transition-all hover:-translate-y-0.5" data-magnetic>
-        Réserver le diagnostic <span aria-hidden="true">→</span>
+    <div class="container-app pb-20 md:pb-28 lg:hidden">
+      <a href="/approche/" class="btn btn-ghost-dark">
+        Voir la méthode en détail <span class="arrow" aria-hidden="true">→</span>
       </a>
     </div>
   </section>
 
+  <!-- ============================ IA ============================ -->
+  <section class="sec-dark py-20 md:py-32 relative overflow-hidden border-t hl-dark">
+    <div class="grid-field" aria-hidden="true"></div>
+    <div class="container-app relative grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-[color:var(--color-vert)] mb-6">Intelligence artificielle</p>
+        <h2 class="h-xl mb-6">
+          Nous intégrons l’IA là où elle crée{' '}
+          <span class="text-[color:var(--color-vert)]">réellement de la valeur.</span>
+        </h2>
+        <p class="text-[color:var(--color-gris-sombre)] leading-relaxed">
+          L’IA n’est pas un argument commercial. C’est un outil, avec un domaine d’emploi précis et
+          des limites que nous vous expliquons avant de l’engager.
+        </p>
+      </div>
+
+      <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4" data-reveal-stagger>
+        {
+          [
+            ['Automatiser', 'Les tâches répétitives, fréquentes et sans jugement — relances, transferts de données, mises en forme.'],
+            ['Analyser', 'Extraire une lecture exploitable de volumes de données qu’une personne ne peut pas traiter à la main.'],
+            ['Accélérer', 'Réduire le délai entre une idée et sa première version testable, en production comme en conception.'],
+            ['Produire', 'Générer des variantes de contenus et de visuels à partir d’un cadre éditorial défini par nous et validé par vous.'],
+            ['Assister', 'Répondre aux questions récurrentes de vos clients, avec passage à un humain dès que l’enjeu le demande.'],
+            ['Optimiser', 'Repérer dans vos données ce qui fonctionne et ce qui doit être arrêté, avant que le budget soit consommé.'],
+          ].map(([titre, texte]) => (
+            <div class="card-dark carte-lueur p-6">
+              <h3 class="font-display text-lg font-semibold mb-2 text-[color:var(--color-vert)]">
+                {titre}
+              </h3>
+              <p class="text-sm text-[color:var(--color-gris-sombre)] leading-relaxed">{texte}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ RÉALISATIONS ============================ -->
+  <section class="sec-light py-20 md:py-32">
+    <div class="container-app">
+      <SectionHead eyebrow="Réalisations" tone="light">
+        <h2 class="h-xl">Des projets réels, décrits sans enjolivement.</h2>
+        <p class="lede text-[color:var(--color-gris-clair)] max-w-2xl mt-6">
+          Nous ne publions ni témoignage ni statistique que nous ne pourrions pas justifier. Chaque
+          projet est présenté avec son état d’avancement exact.
+        </p>
+      </SectionHead>
+
+      <div class="grid md:grid-cols-3 gap-4 mt-14 md:mt-20" data-reveal-stagger>
+        <a href="/realisations/#docom-hub" class="card-light carte-lueur p-7 md:p-8 flex flex-col group">
+          <p class="eyebrow text-[color:var(--color-vert-texte)] mb-5">Produit interne · En production</p>
+          <h3 class="h-md mb-3">DO COM Hub</h3>
+          <p class="text-sm text-[color:var(--color-gris-clair)] leading-relaxed grow">
+            La plateforme qui fait tourner notre propre activité : devis acceptés en ligne, contrats
+            signés à distance, factures et encaissements suivis en base.
+          </p>
+          <span class="text-sm text-[color:var(--color-vert-texte)] mt-6 font-medium">
+            Voir le cas <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a href="/realisations/#ufci" class="card-light carte-lueur p-7 md:p-8 flex flex-col group">
+          <p class="eyebrow text-[color:var(--color-vert-texte)] mb-5">Enseignement supérieur · En cours</p>
+          <h3 class="h-md mb-3">UFCI</h3>
+          <p class="text-sm text-[color:var(--color-gris-clair)] leading-relaxed grow">
+            Digitalisation de processus universitaires. Deux composants distincts : un portail et une
+            bibliothèque numérique protégée.
+          </p>
+          <span class="text-sm text-[color:var(--color-vert-texte)] mt-6 font-medium">
+            Voir le cas <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a href="/realisations/#wk-multi-services" class="card-light carte-lueur p-7 md:p-8 flex flex-col group">
+          <p class="eyebrow text-[color:var(--color-vert-texte)] mb-5">TPE · Mandat mené</p>
+          <h3 class="h-md mb-3">WK Multi Services</h3>
+          <p class="text-sm text-[color:var(--color-gris-clair)] leading-relaxed grow">
+            Structuration de la présence digitale d’un commerce de motos à Abidjan, avec un cadre de
+            mesure défini avant le premier contenu publié.
+          </p>
+          <span class="text-sm text-[color:var(--color-vert-texte)] mt-6 font-medium">
+            Voir le cas <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="mt-12" data-reveal>
+        <a href="/realisations/" class="btn btn-ghost-dark">
+          Voir toutes les réalisations <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ POURQUOI DO COM ============================ -->
+  <section class="sec-dark py-20 md:py-32 border-t hl-dark">
+    <div class="container-app">
+      <SectionHead eyebrow="Pourquoi DO COM">
+        <h2 class="h-xl">Six règles de travail<br class="hidden md:inline" /> que nous ne négocions pas.</h2>
+      </SectionHead>
+
+      <div class="grid md:grid-cols-2 gap-x-10 gap-y-9 mt-14 md:mt-20" data-reveal-stagger>
+        {
+          differences.map((d, i) => (
+            <div class="step">
+              <p class="eyebrow text-[color:var(--color-vert)] mb-3">
+                {String(i + 1).padStart(2, '0')}
+              </p>
+              <h3 class="h-md mb-2.5">{d.titre}</h3>
+              <p class="text-[color:var(--color-gris-sombre)] leading-relaxed text-sm">{d.texte}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ COMMENT COMMENCER ============================ -->
+  <section class="sec-paper py-20 md:py-32">
+    <div class="container-app">
+      <SectionHead eyebrow="Comment commencer" tone="light">
+        <h2 class="h-xl">Cinq étapes, et la première ne vous engage à rien.</h2>
+      </SectionHead>
+
+      <ol class="mt-14 md:mt-20 border-t hl-light" data-reveal-stagger>
+        {
+          commercial.map((c) => (
+            <li class="flex flex-col md:flex-row gap-2 md:gap-10 py-6 md:py-7 border-b hl-light">
+              <span class="eyebrow text-[color:var(--color-vert-texte)] md:w-20 md:pt-1.5 shrink-0">
+                {c.num}
+              </span>
+              <span class="font-display text-xl md:text-2xl font-semibold tracking-tight max-w-3xl">
+                {c.texte}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <CtaBand />
 </Layout>

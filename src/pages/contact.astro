@@ -1,133 +1,195 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE, SOLUTIONS } from '../data/site';
 ---
 
-<Layout current="contact" title="Contact — DO COM" navTheme="dark">
+<Layout
+  title="Contact — parlons de votre projet"
+  description="Décrivez votre situation en quelques lignes. Réponse humaine sous 24 h ouvrées. DO COM, Abidjan, Côte d’Ivoire."
+  current="contact"
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact DO COM',
+      url: `${SITE.url}/contact/`,
+    },
+  ]}
+>
+  <PageHero
+    eyebrow="Contact"
+    lede="Pas de formulaire interminable. Six champs, dont deux facultatifs. Ce que nous voulons comprendre, c’est votre situation — pas remplir une fiche."
+  >
+    Parlons de<br />
+    <span class="text-[color:var(--color-vert)]">votre projet.</span>
+  </PageHero>
 
-  <section class="sec-dark pt-20 pb-16 md:pt-32 md:pb-24 border-b hl-dark">
-    <div class="container-app">
-      <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-8 animate-in">Contact</div>
-      <h1 class="h-mega max-w-5xl mb-10 animate-in" style="animation-delay: 200ms">
-        Un vrai humain<br/>
-        vous répond sous <span class="serif-em text-[color:var(--color-emeraude-glow)]">24 heures.</span>
-      </h1>
-      <p class="text-xl max-w-2xl leading-relaxed text-[color:var(--color-ivoire)]/85 animate-in" style="animation-delay: 400ms">
-        Décrivez votre contexte en quelques lignes. Si nous sommes le bon partenaire, nous vous proposons un appel de diagnostic gratuit. Sinon, nous vous orientons.
-      </p>
-    </div>
-  </section>
-
-  <section class="sec-light py-20 md:py-28">
-    <div class="container-app grid md:grid-cols-12 gap-12">
-
-      <div class="md:col-span-7" data-reveal>
+  <section class="sec-light py-16 md:py-24">
+    <div class="container-app grid lg:grid-cols-12 gap-10 lg:gap-16">
+      <!-- Formulaire -->
+      <div class="lg:col-span-7" data-reveal>
         <form
           name="contact"
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
-          class="space-y-6"
+          action="/contact/merci/"
+          class="space-y-5"
         >
           <input type="hidden" name="form-name" value="contact" />
           <p class="hidden">
-            <label>Ne pas remplir : <input name="bot-field" /></label>
+            <label>Ne pas remplir si vous êtes humain : <input name="bot-field" /></label>
           </p>
 
-          <div class="grid md:grid-cols-2 gap-6">
-            <label class="block">
-              <span class="block text-sm mb-2 text-[color:var(--color-encre)] font-medium">Nom complet *</span>
-              <input required type="text" name="nom" class="w-full bg-[color:var(--color-ivoire-soft)] border border-[color:var(--color-line-light)] rounded-xl px-4 py-3.5 text-sm text-[color:var(--color-encre)] focus:outline-none focus:border-[color:var(--color-emeraude)] transition-colors" />
-            </label>
-            <label class="block">
-              <span class="block text-sm mb-2 text-[color:var(--color-encre)] font-medium">Entreprise / structure</span>
-              <input type="text" name="entreprise" class="w-full bg-[color:var(--color-ivoire-soft)] border border-[color:var(--color-line-light)] rounded-xl px-4 py-3.5 text-sm text-[color:var(--color-encre)] focus:outline-none focus:border-[color:var(--color-emeraude)] transition-colors" />
-            </label>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="field-label" for="nom">Nom et prénom <span aria-hidden="true">*</span></label>
+              <input class="field" id="nom" name="nom" type="text" required autocomplete="name" />
+            </div>
+            <div>
+              <label class="field-label" for="organisation">Entreprise ou organisation</label>
+              <input
+                class="field"
+                id="organisation"
+                name="organisation"
+                type="text"
+                autocomplete="organization"
+              />
+            </div>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-6">
-            <label class="block">
-              <span class="block text-sm mb-2 text-[color:var(--color-encre)] font-medium">Email *</span>
-              <input required type="email" name="email" class="w-full bg-[color:var(--color-ivoire-soft)] border border-[color:var(--color-line-light)] rounded-xl px-4 py-3.5 text-sm text-[color:var(--color-encre)] focus:outline-none focus:border-[color:var(--color-emeraude)] transition-colors" />
-            </label>
-            <label class="block">
-              <span class="block text-sm mb-2 text-[color:var(--color-encre)] font-medium">WhatsApp / téléphone</span>
-              <input type="tel" name="tel" class="w-full bg-[color:var(--color-ivoire-soft)] border border-[color:var(--color-line-light)] rounded-xl px-4 py-3.5 text-sm text-[color:var(--color-encre)] focus:outline-none focus:border-[color:var(--color-emeraude)] transition-colors" />
-            </label>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="field-label" for="email">Email <span aria-hidden="true">*</span></label>
+              <input class="field" id="email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div>
+              <label class="field-label" for="telephone">WhatsApp ou téléphone</label>
+              <input class="field" id="telephone" name="telephone" type="tel" autocomplete="tel" />
+            </div>
           </div>
 
-          <label class="block">
-            <span class="block text-sm mb-2 text-[color:var(--color-encre)] font-medium">Sur quel pilier ? *</span>
-            <select required name="pilier" class="w-full bg-[color:var(--color-ivoire-soft)] border border-[color:var(--color-line-light)] rounded-xl px-4 py-3.5 text-sm text-[color:var(--color-encre)] focus:outline-none focus:border-[color:var(--color-emeraude)] transition-colors">
+          <div>
+            <label class="field-label" for="besoin">Type de besoin <span aria-hidden="true">*</span></label>
+            <select class="field" id="besoin" name="besoin" required>
               <option value="">— Choisir —</option>
-              <option value="publicite">Publicité digitale & growth</option>
-              <option value="audit">Audit & conseil stratégique</option>
-              <option value="site">Création de site web</option>
-              <option value="indecis">Je ne sais pas encore, aidez-moi à choisir</option>
+              {SOLUTIONS.map((s) => <option value={s.slug}>{s.titre}</option>)}
+              <option value="diagnostic">Un diagnostic — je ne sais pas encore par où commencer</option>
             </select>
-          </label>
+          </div>
 
-          <label class="block">
-            <span class="block text-sm mb-2 text-[color:var(--color-encre)] font-medium">Votre contexte en 3 à 5 lignes *</span>
-            <textarea required name="message" rows="6" placeholder="Votre activité, votre objectif à 3 mois, ce qui bloque aujourd'hui." class="w-full bg-[color:var(--color-ivoire-soft)] border border-[color:var(--color-line-light)] rounded-xl px-4 py-3.5 text-sm text-[color:var(--color-encre)] focus:outline-none focus:border-[color:var(--color-emeraude)] transition-colors resize-vertical"></textarea>
-          </label>
+          <div>
+            <label class="field-label" for="message">
+              Votre situation, en quelques lignes <span aria-hidden="true">*</span>
+            </label>
+            <textarea
+              class="field resize-y"
+              id="message"
+              name="message"
+              rows="6"
+              required
+              placeholder="Votre activité, ce que vous cherchez à obtenir, et ce qui bloque aujourd’hui."></textarea>
+          </div>
 
-          <label class="block">
-            <span class="block text-sm mb-2 text-[color:var(--color-encre)] font-medium">Budget disponible <span class="text-[color:var(--color-gris-warm)] font-normal">(optionnel)</span></span>
-            <select name="budget" class="w-full bg-[color:var(--color-ivoire-soft)] border border-[color:var(--color-line-light)] rounded-xl px-4 py-3.5 text-sm text-[color:var(--color-encre)] focus:outline-none focus:border-[color:var(--color-emeraude)] transition-colors">
-              <option value="">— Préfère ne pas dire —</option>
-              <option>Moins de 200 000 FCFA / 300 €</option>
-              <option>200 000 – 500 000 FCFA / 300 – 800 €</option>
+          <div>
+            <label class="field-label" for="budget">
+              Budget indicatif{' '}
+              <span class="font-normal text-[color:var(--color-gris-clair)]">(facultatif)</span>
+            </label>
+            <select class="field" id="budget" name="budget">
+              <option value="">— Préfère ne pas répondre —</option>
+              <option>Moins de 500 000 FCFA / 800 €</option>
               <option>500 000 – 1 500 000 FCFA / 800 – 2 500 €</option>
-              <option>Plus de 1 500 000 FCFA / 2 500 €</option>
+              <option>1 500 000 – 5 000 000 FCFA / 2 500 – 8 000 €</option>
+              <option>Plus de 5 000 000 FCFA / 8 000 €</option>
+              <option>À définir ensemble</option>
             </select>
-          </label>
+            <p class="text-xs text-[color:var(--color-gris-clair)] mt-2">
+              Cette information sert uniquement à vous proposer un périmètre réaliste dès le premier
+              échange. Elle ne détermine pas notre réponse.
+            </p>
+          </div>
 
-          <button type="submit" class="btn-emeraude w-full md:w-auto">
-            Envoyer la demande <span class="arrow">→</span>
+          <button type="submit" class="btn btn-vert w-full sm:w-auto">
+            Envoyer <span class="arrow" aria-hidden="true">→</span>
           </button>
 
-          <p class="text-xs text-[color:var(--color-gris-warm)]">
-            Vous recevez une réponse humaine sous 24 h en semaine. Aucune donnée n'est revendue.
+          <p class="text-xs text-[color:var(--color-gris-clair)]">
+            Réponse humaine sous 24 h ouvrées. Vos informations servent uniquement à traiter votre
+            demande — elles ne sont ni revendues, ni utilisées pour des envois commerciaux.
           </p>
         </form>
       </div>
 
-      <aside class="md:col-span-5 space-y-6" data-reveal>
-        <div class="card-light p-8" data-tilt>
-          <div class="eyebrow text-emeraude mb-4">Contact direct</div>
-          <div class="space-y-3">
-            <a href="mailto:docommunication.ci@gmail.com" class="block group">
-              <div class="text-xs text-[color:var(--color-gris-warm)] mb-1">Email</div>
-              <div class="text-[color:var(--color-encre)] group-hover:text-emeraude transition-colors">docommunication.ci@gmail.com</div>
-            </a>
-            <a href="https://wa.me/2250711358623" class="block group">
-              <div class="text-xs text-[color:var(--color-gris-warm)] mb-1">WhatsApp</div>
-              <div class="text-[color:var(--color-encre)] group-hover:text-emeraude transition-colors">+225 07 11 35 86 23</div>
-            </a>
-          </div>
-        </div>
-
-        <div class="card-light p-8" data-tilt>
-          <div class="eyebrow text-emeraude mb-4">Ce que vous obtenez à l'appel</div>
-          <ul class="text-[color:var(--color-gris-warm)] space-y-2.5 text-sm">
-            <li class="flex gap-3"><span class="text-emeraude flex-shrink-0">→</span> 45 minutes en visio ou WhatsApp</li>
-            <li class="flex gap-3"><span class="text-emeraude flex-shrink-0">→</span> Comprendre votre contexte, pas vendre du service</li>
-            <li class="flex gap-3"><span class="text-emeraude flex-shrink-0">→</span> 3 recommandations concrètes à emporter</li>
-            <li class="flex gap-3"><span class="text-emeraude flex-shrink-0">→</span> Une proposition claire si nous sommes le bon partenaire</li>
+      <!-- Colonne latérale -->
+      <aside class="lg:col-span-5 space-y-4" data-reveal>
+        <div class="card-light carte-lueur p-7">
+          <p class="eyebrow text-[color:var(--color-vert-texte)] mb-5">Contact direct</p>
+          <ul class="space-y-4">
+            <li>
+              <p class="text-xs text-[color:var(--color-gris-clair)] mb-1">WhatsApp</p>
+              <a
+                href={SITE.whatsapp}
+                rel="noopener"
+                class="font-display text-lg font-semibold hover:text-[color:var(--color-vert-texte)] transition-colors"
+                >{SITE.telephone}</a
+              >
+            </li>
+            <li>
+              <p class="text-xs text-[color:var(--color-gris-clair)] mb-1">Email</p>
+              <a
+                href={`mailto:${SITE.email}`}
+                class="font-display text-lg font-semibold hover:text-[color:var(--color-vert-texte)] transition-colors break-words"
+                >{SITE.email}</a
+              >
+            </li>
+            <li>
+              <p class="text-xs text-[color:var(--color-gris-clair)] mb-1">Adresse</p>
+              <p class="text-[color:var(--color-gris-clair)]">
+                {SITE.ville} · {SITE.quartier}<br />{SITE.pays}
+              </p>
+            </li>
           </ul>
         </div>
 
-        <div class="card-light p-8" data-tilt>
-          <div class="eyebrow text-emeraude mb-4">Basé à</div>
-          <div class="text-[color:var(--color-gris-warm)] text-sm leading-relaxed">
-            Abidjan · Cocody Angré<br/>
-            Côte d'Ivoire<br/>
-            <span class="text-[color:var(--color-encre)] block mt-3 font-medium">Nous servons l'Afrique et l'Europe francophone à distance.</span>
-          </div>
+        <div class="card-light carte-lueur p-7">
+          <p class="eyebrow text-[color:var(--color-vert-texte)] mb-5">Ce qui se passe ensuite</p>
+          <ol class="space-y-3.5 text-sm text-[color:var(--color-gris-clair)]">
+            <li class="rule-accent">Nous lisons votre demande et revenons vers vous sous 24 h ouvrées.</li>
+            <li class="rule-accent">
+              Si le besoin est clair, nous proposons directement une approche et un ordre de grandeur.
+            </li>
+            <li class="rule-accent">
+              S’il ne l’est pas encore, nous proposons un diagnostic de 45 minutes, sans engagement.
+            </li>
+            <li class="rule-accent">
+              Si nous ne sommes pas le bon interlocuteur, nous vous le disons et vous orientons.
+            </li>
+          </ol>
+        </div>
+
+        <a href="/faq/" class="card-light carte-lueur p-7 block group">
+          <p class="eyebrow text-[color:var(--color-vert-texte)] mb-4">Avant de nous écrire</p>
+          <p class="text-[color:var(--color-gris-clair)] leading-relaxed text-sm mb-4">
+            Budget et acompte, déroulement d’un projet, propriété du code, usage de l’IA : les
+            réponses aux questions les plus fréquentes sont déjà écrites.
+          </p>
+          <span class="text-sm text-[color:var(--color-vert-texte)] font-medium">
+            Voir les questions fréquentes{' '}
+            <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <div class="border hl-light rounded-xl p-7 bg-[color:var(--color-papier)]">
+          <p class="eyebrow text-[color:var(--color-gris-clair)] mb-4">Comment bien écrire</p>
+          <p class="text-sm text-[color:var(--color-gris-clair)] leading-relaxed">
+            Le message le plus utile tient en quatre lignes : ce que vous cherchez à obtenir, ce qui
+            vous limite aujourd’hui, à quoi ressemblerait un projet réussi, et pour quand. Avec ça,
+            notre première réponse est déjà une réponse de fond.
+          </p>
         </div>
       </aside>
-
     </div>
   </section>
-
 </Layout>

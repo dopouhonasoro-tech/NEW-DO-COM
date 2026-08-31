@@ -1,121 +1,224 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../data/site';
+
+type Cas = {
+  id: string;
+  client: string;
+  secteur: string;
+  etat: string;
+  probleme: string;
+  solution: string[];
+  approche: string[];
+  resultat: string;
+  reserve?: string;
+};
+
+const cas: Cas[] = [
+  {
+    id: 'docom-hub',
+    client: 'DO COM Hub',
+    secteur: 'Produit interne DO COM',
+    etat: 'En production',
+    probleme:
+      'Notre propre activité tournait comme celle de nos clients : devis rédigés à la main, relances dans WhatsApp, suivi des paiements dans un tableur, contrats imprimés puis scannés. Chaque dossier demandait de rassembler des informations éparpillées dans quatre endroits différents.',
+    solution: [
+      'Espace client et espace administrateur séparés, avec des droits distincts au niveau de la base de données',
+      'Devis numérotés, calculés en base, acceptés en ligne par un lien — sans que le client ait à créer un compte',
+      'Conversion d’un devis accepté en projet, facture d’acompte et contrat pré-rempli, en une action',
+      'Contrats signés à distance, texte figé à l’envoi et empreinte de contrôle calculée, signature horodatée',
+      'Encaissements Wave, Orange Money, MTN, Moov et virement, avec statut de facture recalculé automatiquement',
+      'Pipeline commercial, tickets de support et gestion d’équipe',
+    ],
+    approche: [
+      'Next.js',
+      'Supabase (base de données, authentification, règles d’accès par ligne)',
+      'Vercel',
+      'Génération de PDF côté serveur',
+    ],
+    resultat:
+      'Le cycle complet — prospect, devis accepté en ligne, projet, contrat signé, factures encaissées — est couvert dans un seul outil, en usage réel depuis août 2026. C’est aussi notre banc d’essai : les décisions techniques validées ici servent aux plateformes que nous construisons pour nos clients.',
+    reserve:
+      'La signature électronique mise en œuvre est une signature simple au sens du règlement eIDAS. Elle convient aux prestations courantes ; un grand compte exigeant une signature qualifiée doit passer par un prestataire certifié. Nous le disons avant la vente, pas après.',
+  },
+  {
+    id: 'ufci',
+    client: 'UFCI',
+    secteur: 'Enseignement supérieur',
+    etat: 'En cours',
+    probleme:
+      'Digitaliser des processus universitaires et donner aux utilisateurs authentifiés l’accès à un fonds documentaire, sans que ce fonds puisse être téléchargé ou rediffusé librement.',
+    solution: [
+      'Deux composants distincts, avec des périmètres et des contraintes propres : le portail universitaire d’une part, la bibliothèque numérique protégée d’autre part',
+      'Pour la bibliothèque : dépôt et organisation des ouvrages par l’administration de l’établissement',
+      'Lecture en ligne sans exposition du fichier d’origine, blocage de la copie et de l’impression',
+      'Filigrane nominatif sur chaque page consultée, et journalisation des consultations',
+    ],
+    approche: [
+      'Architecture web par protections en couches',
+      'Authentification et comptes créés par l’administration',
+      'Traçabilité des consultations',
+    ],
+    resultat:
+      'Projet en cours de construction. Le premier livrable a été un cahier des charges qui établit noir sur blanc ce qui est techniquement possible et ce qui ne l’est pas — avant l’engagement, pas après la livraison.',
+    reserve:
+      'Aucune plateforme ne peut empêcher une capture d’écran ni la photo d’un écran : ce sont des fonctions du système d’exploitation, hors de portée d’un site web. L’objectif réaliste, celui que vise ce projet, est de rendre la copie contraignante, lente et traçable. Les résultats d’usage seront publiés ici lorsqu’ils seront mesurés.',
+  },
+  {
+    id: 'wk-multi-services',
+    client: 'WK Multi Services',
+    secteur: 'TPE — vente, location et après-vente de motos, Abidjan',
+    etat: 'Mandat mené de mai à août 2026',
+    probleme:
+      'Une activité rentable, tenue seule par son gérant, avec une trésorerie stable grâce aux locations récurrentes — mais aucune présence digitale structurée, un emplacement physique peu visible, un positionnement flou, et des publications irrégulières faute d’idées de contenu.',
+    solution: [
+      'Trois profils de clients définis explicitement, avec un message propre à chacun plutôt qu’un discours unique',
+      'Trois canaux retenus et assumés : Facebook, TikTok et WhatsApp Business — le référencement et l’email écartés car non pertinents pour ce commerce local',
+      'Un cadre de mesure établi avant la première publication : abonnés, vues, messages entrants, transactions',
+      'Un budget publicitaire de test volontairement faible, engagé après la structuration des canaux et non avant',
+    ],
+    approche: [
+      'Stratégie de contenu par profil de client',
+      'WhatsApp Business comme canal de conversion principal',
+      'Meta Ads en budget de test',
+    ],
+    resultat:
+      'La présence digitale a été structurée et un cadre de suivi partagé avec le gérant, avec des objectifs chiffrés fixés du premier au troisième mois. Nous ne publions pas de chiffres d’affaires ni de résultats commerciaux pour ce mandat : les objectifs fixés ne sont pas des résultats constatés, et nous ne présentons pas les uns pour les autres.',
+  },
+];
 ---
 
-<Layout current="realisations" title="Réalisations — DO COM" navTheme="dark">
+<Layout
+  title="Réalisations — projets et cas concrets"
+  description="Les projets menés par DO COM, présentés avec leur problème, la solution construite, les technologies employées et leur état d’avancement réel."
+  current="realisations"
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Réalisations DO COM',
+      url: `${SITE.url}/realisations/`,
+    },
+  ]}
+>
+  <PageHero
+    eyebrow="Réalisations"
+    lede="Nous préférons trois projets décrits honnêtement à vingt logos alignés. Chaque cas indique son état réel — livré, en cours, ou mené sur une période donnée."
+  >
+    Ce que nous avons<br />
+    <span class="text-[color:var(--color-vert)]">réellement construit.</span>
+  </PageHero>
 
-  <section class="sec-dark pt-20 pb-24 md:pt-32 md:pb-32 border-b hl-dark">
-    <div class="container-app">
-      <div class="eyebrow text-[color:var(--color-emeraude-glow)] mb-8 animate-in">Réalisations</div>
-      <h1 class="h-mega max-w-5xl mb-10 animate-in" style="animation-delay: 200ms">
-        Chaque mandat<br/>
-        raconte <span class="serif-em text-[color:var(--color-emeraude-glow)]">un choix.</span>
-      </h1>
-      <p class="text-xl max-w-2xl leading-relaxed text-[color:var(--color-ivoire)]/85 animate-in" style="animation-delay: 400ms">
-        Nous ne travaillons pas avec tout le monde. Voici les mandats sur lesquels nous avons dit oui — et pourquoi.
+  <!-- Note de méthode -->
+  <section class="sec-ink border-y hl-dark">
+    <div class="container-app py-8 md:py-10">
+      <p class="text-sm text-[color:var(--color-gris-sombre)] max-w-4xl leading-relaxed rule-accent">
+        <strong class="text-[color:var(--color-blanc)] font-medium">Note de méthode.</strong> Cette
+        page ne contient aucun témoignage, aucune statistique et aucun résultat que nous ne pourrions
+        pas justifier sur demande. Les objectifs fixés avec un client ne sont jamais présentés comme
+        des résultats obtenus. Les maquettes réalisées à des fins de prospection commerciale n’y
+        figurent pas : ce ne sont pas des mandats.
       </p>
     </div>
   </section>
 
-  <section class="sec-light py-20 md:py-32">
-    <div class="container-app space-y-24 md:space-y-32">
+  {
+    cas.map((c, i) => (
+      <section
+        id={c.id}
+        class:list={['py-16 md:py-28 scroll-mt-24', i % 2 === 0 ? 'sec-light' : 'sec-paper']}
+      >
+        <div class="container-app">
+          <div class="grid lg:grid-cols-12 gap-6 lg:gap-16 mb-12" data-reveal>
+            <div class="lg:col-span-5">
+              <p class="eyebrow text-[color:var(--color-vert-texte)] mb-4">{c.secteur}</p>
+              <h2 class="h-xl mb-4">{c.client}</h2>
+              <p class="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--color-vert-texte)] border border-[color:var(--color-vert-texte)]/30 rounded-full px-3.5 py-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-vert-texte)]" />
+                {c.etat}
+              </p>
+            </div>
+            <div class="lg:col-span-7">
+              <p class="eyebrow text-[color:var(--color-gris-clair)] mb-4">Problème</p>
+              <p class="lede text-[color:var(--color-gris-clair)] leading-relaxed">{c.probleme}</p>
+            </div>
+          </div>
 
-      <!-- STRANINVEST -->
-      <article class="grid md:grid-cols-12 gap-10 md:gap-16 items-start" data-reveal>
-        <div class="md:col-span-4">
-          <div class="eyebrow text-emeraude mb-4">Communication corporate</div>
-          <div class="font-display text-5xl md:text-6xl leading-none mb-6 text-[color:var(--color-encre)]">STRANINVEST</div>
-          <div class="text-sm text-[color:var(--color-gris-warm)] space-y-1.5 pt-4 border-t hl-light">
-            <div><span class="text-[color:var(--color-encre)] font-medium">Secteur</span> · holding, 5 entités</div>
-            <div><span class="text-[color:var(--color-encre)] font-medium">Marché</span> · Côte d'Ivoire</div>
-            <div><span class="text-[color:var(--color-encre)] font-medium">Site</span> · straninvest.com</div>
+          <div class="grid lg:grid-cols-12 gap-6 lg:gap-16" data-reveal>
+            <div class="lg:col-span-5 space-y-6">
+              <div>
+                <p class="eyebrow text-[color:var(--color-gris-clair)] mb-4">Approche & technologies</p>
+                <ul class="flex flex-wrap gap-2">
+                  {c.approche.map((t) => (
+                    <li class="text-xs font-mono border hl-light rounded-md px-2.5 py-1.5 text-[color:var(--color-gris-clair)] bg-white">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="card-light carte-lueur p-7">
+                <p class="eyebrow text-[color:var(--color-vert-texte)] mb-4">Résultat</p>
+                <p class="text-[color:var(--color-gris-clair)] leading-relaxed text-sm">
+                  {c.resultat}
+                </p>
+              </div>
+
+              {c.reserve && (
+                <div class="border-l-2 border-[color:var(--color-noir)] pl-5 py-1">
+                  <p class="eyebrow text-[color:var(--color-noir)] mb-3">Ce que nous précisons</p>
+                  <p class="text-sm text-[color:var(--color-gris-clair)] leading-relaxed">
+                    {c.reserve}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div class="lg:col-span-7">
+              <p class="eyebrow text-[color:var(--color-gris-clair)] mb-5">Solution construite</p>
+              <ul class="border-t hl-light">
+                {c.solution.map((s) => (
+                  <li class="py-4 border-b hl-light text-[color:var(--color-gris-clair)] leading-relaxed">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-        <div class="md:col-span-8 space-y-5 text-[color:var(--color-gris-warm)] leading-relaxed text-lg">
-          <p>
-            Un groupe holding basé à Abidjan avait besoin d'un film institutionnel pour asseoir sa lisibilité auprès de ses partenaires bancaires et institutionnels. Un enjeu : présenter 5 entités hétérogènes sous un récit de marque cohérent.
-          </p>
-          <p class="text-[color:var(--color-encre)]">
-            <span class="serif-em text-emeraude">Ce que nous avons livré</span> — brief structuré, script validé par la direction, planning de tournage, film institutionnel de 3 minutes. Point d'entrée stratégique vers une gestion de communication étendue du groupe.
-          </p>
-        </div>
-      </article>
+      </section>
+    ))
+  }
 
-      <!-- WK MULTI SERVICES -->
-      <article class="grid md:grid-cols-12 gap-10 md:gap-16 items-start border-t hl-light pt-24 md:pt-32" data-reveal>
-        <div class="md:col-span-4">
-          <div class="eyebrow text-emeraude mb-4">Stratégie & pilotage</div>
-          <div class="font-display text-5xl md:text-6xl leading-none mb-6 text-[color:var(--color-encre)]">WK Multi Services</div>
-          <div class="text-sm text-[color:var(--color-gris-warm)] space-y-1.5 pt-4 border-t hl-light">
-            <div><span class="text-[color:var(--color-encre)] font-medium">Secteur</span> · vente & location motos, SAV</div>
-            <div><span class="text-[color:var(--color-encre)] font-medium">Marché</span> · Abidjan</div>
-            <div><span class="text-[color:var(--color-encre)] font-medium">Ancienneté</span> · 2 ans</div>
-          </div>
-        </div>
-        <div class="md:col-span-8 space-y-5 text-[color:var(--color-gris-warm)] leading-relaxed text-lg">
-          <p>
-            Une TPE avec une bonne réputation locale mais aucune présence digitale structurée. Le vrai problème n'était pas "faire des posts" — c'était traduire un métier fait de bouche-à-oreille en un système d'acquisition mesurable.
-          </p>
-          <p class="text-[color:var(--color-encre)]">
-            <span class="serif-em text-emeraude">Ce que nous avons livré</span> — stratégie de contenu par persona (3 profils cibles), objectifs chiffrés mois 1 → mois 3 (abonnés, vues, messages, ventes), pilotage éditorial et rapport mensuel. Projection : 300K FCFA → 700K FCFA de revenu mensuel sur 3 mois.
-          </p>
-        </div>
-      </article>
-
-      <!-- SOS HÉPATITES CI -->
-      <article class="grid md:grid-cols-12 gap-10 md:gap-16 items-start border-t hl-light pt-24 md:pt-32" data-reveal>
-        <div class="md:col-span-4">
-          <div class="eyebrow text-emeraude mb-4">Site institutionnel</div>
-          <div class="font-display text-5xl md:text-6xl leading-none mb-6 text-[color:var(--color-encre)]">SOS Hépatites CI</div>
-          <div class="text-sm text-[color:var(--color-gris-warm)] space-y-1.5 pt-4 border-t hl-light">
-            <div><span class="text-[color:var(--color-encre)] font-medium">Secteur</span> · OSC santé publique</div>
-            <div><span class="text-[color:var(--color-encre)] font-medium">Marché</span> · Côte d'Ivoire</div>
-          </div>
-        </div>
-        <div class="md:col-span-8 space-y-5 text-[color:var(--color-gris-warm)] leading-relaxed text-lg">
-          <p>
-            Une organisation de la société civile qui devait convaincre bailleurs, partenaires et bénéficiaires — trois audiences avec des attentes différentes, sur un sujet sensible (santé publique).
-          </p>
-          <p class="text-[color:var(--color-encre)]">
-            <span class="serif-em text-emeraude">Ce que nous avons livré</span> — site institutionnel clair, avec la hiérarchie d'information adaptée aux bailleurs (mission, gouvernance, réalisations) et une porte d'entrée simple pour les bénéficiaires.
-          </p>
-        </div>
-      </article>
-
-      <!-- DR DOBA SORO -->
-      <article class="grid md:grid-cols-12 gap-10 md:gap-16 items-start border-t hl-light pt-24 md:pt-32" data-reveal>
-        <div class="md:col-span-4">
-          <div class="eyebrow text-emeraude mb-4">Site institutionnel</div>
-          <div class="font-display text-5xl md:text-6xl leading-none mb-6 text-[color:var(--color-encre)]">Dr Doba SORO</div>
-          <div class="text-sm text-[color:var(--color-gris-warm)] space-y-1.5 pt-4 border-t hl-light">
-            <div><span class="text-[color:var(--color-encre)] font-medium">Secteur</span> · profession médicale</div>
-            <div><span class="text-[color:var(--color-encre)] font-medium">Marché</span> · Côte d'Ivoire</div>
-          </div>
-        </div>
-        <div class="md:col-span-8 space-y-5 text-[color:var(--color-gris-warm)] leading-relaxed text-lg">
-          <p>
-            Un praticien qui recevait des sollicitations désordonnées (WhatsApp, appels, RDV manqués). Le besoin : filtrer et canaliser sans perdre le lien humain, sur un secteur où l'image doit rester irréprochable.
-          </p>
-          <p class="text-[color:var(--color-encre)]">
-            <span class="serif-em text-emeraude">Ce que nous avons livré</span> — site institutionnel sobre, contenu clair, canaux de prise de contact hiérarchisés. Format qui installe la confiance sans en faire trop.
-          </p>
-        </div>
-      </article>
-
+  <!-- Références corporate -->
+  <section class="sec-dark py-16 md:py-24 border-t hl-dark">
+    <div class="container-app grid lg:grid-cols-12 gap-8 lg:gap-16" data-reveal>
+      <div class="lg:col-span-5">
+        <p class="eyebrow text-[color:var(--color-vert)] mb-4">Autres interventions</p>
+        <h2 class="h-lg">Tout ce que nous faisons n’est pas publiable.</h2>
+      </div>
+      <div class="lg:col-span-7 text-[color:var(--color-gris-sombre)] leading-relaxed space-y-4">
+        <p>
+          Certains mandats relèvent de la confidentialité contractuelle, d’autres sont en cours de
+          négociation ou suspendus par le client pour des raisons qui lui appartiennent. Ils ne
+          figurent pas ici tant qu’ils ne peuvent pas être décrits avec exactitude.
+        </p>
+        <p>
+          Si vous souhaitez des références précises sur un secteur ou un type de projet avant de
+          vous engager, demandez-les : nous vous répondrons directement, avec l’état réel de chaque
+          dossier.
+        </p>
+        <a href="/contact/" class="btn btn-ghost-light mt-2">
+          Demander des références <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="sec-emeraude">
-    <div class="container-narrow py-20 md:py-28 text-center" data-reveal>
-      <h2 class="h-lg mb-6">Un projet en tête ?</h2>
-      <p class="max-w-2xl mx-auto mb-10 leading-relaxed text-[color:var(--color-ivoire)]/85">
-        Décrivez-nous votre contexte. Si nous sommes le bon partenaire, nous vous le dirons. Sinon, nous vous orientons.
-      </p>
-      <a href="/contact/" class="inline-flex items-center justify-center gap-2 bg-[color:var(--color-ivoire)] text-[color:var(--color-encre)] font-medium px-8 py-4 rounded-full hover:bg-white transition-all hover:-translate-y-0.5">
-        Parler d'un projet <span aria-hidden="true">→</span>
-      </a>
-    </div>
-  </section>
-
+  <CtaBand
+    titre="Le prochain cas de cette page peut être le vôtre."
+    texte="Décrivez votre situation en quelques lignes. Nous vous dirons franchement si nous sommes le bon interlocuteur, et ce que nous ferions à votre place."
+  />
 </Layout>

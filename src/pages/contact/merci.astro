@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE, SOLUTIONS } from '../../data/site';
+---
+
+<Layout
+  title="Message reçu"
+  description="Votre demande a bien été transmise à DO COM. Réponse humaine sous 24 h ouvrées."
+  current="contact"
+>
+  <section class="sec-dark relative overflow-hidden min-h-[80svh] flex items-center">
+    <div class="grid-field" aria-hidden="true"></div>
+    <div class="glow-vert w-[32rem] h-[32rem] -top-40 -right-32" aria-hidden="true"></div>
+
+    <div class="container-app relative py-24">
+      <p class="eyebrow text-[color:var(--color-vert)] mb-6 animate-in">Message reçu</p>
+      <h1 class="h-mega max-w-3xl animate-in" style="animation-delay:90ms">
+        Merci. Nous revenons vers vous <span class="text-[color:var(--color-vert)]">sous 24 h ouvrées.</span>
+      </h1>
+      <p
+        class="lede text-[color:var(--color-gris-sombre)] max-w-2xl mt-8 animate-in"
+        style="animation-delay:180ms"
+      >
+        Votre demande a bien été transmise. Si votre projet est urgent, écrivez-nous directement sur
+        WhatsApp — c’est le canal sur lequel nous répondons le plus vite.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 mt-10 animate-in" style="animation-delay:270ms">
+        <a href={SITE.whatsapp} rel="noopener" class="btn btn-vert">
+          Écrire sur WhatsApp <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="/" class="btn btn-ghost-light">Retour à l’accueil</a>
+      </div>
+
+      <div class="mt-16 pt-10 border-t hl-dark max-w-3xl animate-in" style="animation-delay:360ms">
+        <p class="eyebrow text-[color:var(--color-gris-sombre)] mb-5">En attendant</p>
+        <ul class="flex flex-wrap gap-2">
+          {
+            SOLUTIONS.map((s) => (
+              <li>
+                <a
+                  href={`/solutions/${s.slug}/`}
+                  class="inline-block text-sm border border-[color:var(--color-filet-sombre)] rounded-md px-3.5 py-2 text-[color:var(--color-gris-sombre)] hover:border-[color:var(--color-vert)] hover:text-[color:var(--color-vert)] transition-colors"
+                >
+                  {s.titre}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
