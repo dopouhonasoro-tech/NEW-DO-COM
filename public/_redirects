@@ -1,0 +1,3 @@
+# Lu par Netlify et par Cloudflare Pages.
+/services     /solutions/  301
+/services/*   /solutions/  301
