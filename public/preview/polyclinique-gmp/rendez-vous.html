@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Demander un rendez-vous — Polyclinique GMP</title>
+<meta name="description" content="Maquette de proposition réalisée par DO COM pour la Polyclinique GMP — document de travail, sans engagement."/>
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+<meta name="theme-color" content="#123A4A"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --encre:#0E1B24;--marine:#123A4A;--lagune:#1F7A8C;--lagune-f:#16606E;--ecume:#E7F0F1;--brume:#F2F6F6;
+  --papier:#FBFBF8;--pierre:#56636B;--trait:#D9E2E4;--urgence:#B8322A;--urgence-f:#FBEAE8;
+  --disp:"Newsreader",Georgia,serif;--sans:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --max:1200px;--r:6px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--brume);color:var(--encre);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--disp);font-weight:500;letter-spacing:-.01em;text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lagune-f)}
+:focus-visible{outline:2px solid var(--lagune);outline-offset:3px}
+.proto{background:var(--encre);color:#C9D6DA;font-size:.78rem;text-align:center;padding:7px 16px;font-family:var(--mono)}
+.proto strong{color:#fff;font-weight:500}
+.urg{background:var(--urgence);color:#fff}
+.urg .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:9px;padding-bottom:9px;font-size:.88rem;flex-wrap:wrap}
+.urg a{font-family:var(--mono);font-weight:500;text-decoration:none}
+header.site{background:var(--papier);border-bottom:1px solid var(--trait)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:74px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo .mk{width:48px;height:44px;flex:none;border-radius:8px;background:var(--marine);color:#fff;display:grid;place-items:center;font-family:var(--sans);font-size:.86rem;font-weight:600;letter-spacing:.06em}
+.logo .nm b{display:block;font-family:var(--disp);font-weight:600;font-size:1.18rem;line-height:1.1}
+.logo .nm span{font-size:.72rem;color:var(--pierre);letter-spacing:.04em}
+@media (max-width:760px){.logo .nm span{display:none}}
+.back{font-size:.9rem;color:var(--lagune-f);text-decoration:none;font-weight:500}
+
+.page{display:grid;grid-template-columns:1fr 360px;gap:32px;padding:56px 24px 88px;align-items:start}
+.page h1{font-size:clamp(2rem,3.6vw,2.8rem);margin:10px 0 12px}
+.page .intro{color:var(--pierre);max-width:56ch;margin:0 0 32px}
+form{background:#fff;border:1px solid var(--trait);border-radius:12px;padding:32px;display:grid;gap:22px}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:14px}
+legend{font-family:var(--mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--lagune-f);margin-bottom:6px;padding:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:grid;gap:6px;font-size:.9rem;font-weight:500}
+input,select,textarea{font:inherit;font-weight:400;padding:12px 14px;border:1px solid var(--trait);border-radius:var(--r);background:var(--papier);color:var(--encre);width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--lagune);outline-offset:0;border-color:var(--lagune)}
+textarea{min-height:96px;resize:vertical}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.choice span{display:block;padding:14px;border:1px solid var(--trait);border-radius:var(--r);font-size:.9rem;background:var(--papier);text-align:center}
+.choice input:checked+span{border-color:var(--marine);background:var(--ecume);font-weight:500}
+.choice input:focus-visible+span{outline:2px solid var(--lagune);outline-offset:2px}
+.hint{font-size:.82rem;color:var(--pierre);font-weight:400}
+.consent{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.86rem;color:var(--pierre)}
+.consent input{width:auto;margin-top:4px}
+
+.btn{white-space:nowrap;display:inline-flex;justify-content:center;padding:14px 22px;border-radius:var(--r);font-weight:500;font-size:.98rem;border:0;cursor:pointer;font-family:var(--sans);background:var(--marine);color:#fff}
+.btn:hover{background:var(--encre)}
+.note{display:none;background:var(--ecume);border:1px solid var(--lagune);border-radius:var(--r);padding:14px 16px;font-size:.9rem}
+.note.on{display:block}
+aside .box{background:#fff;border:1px solid var(--trait);border-radius:12px;padding:26px;margin-bottom:14px}
+aside .box.u{background:var(--urgence-f);border-color:#EFC5C1}
+aside h2{font-family:var(--sans);font-size:1rem;font-weight:600;margin-bottom:8px}
+aside p{margin:0;font-size:.9rem;color:var(--pierre)}
+aside .tel{display:block;margin-top:10px;font-family:var(--mono);font-size:1.25rem;color:var(--urgence);text-decoration:none;font-weight:500}
+aside ol{margin:8px 0 0;padding-left:18px;font-size:.9rem;color:var(--pierre)}
+aside li{margin-bottom:6px}
+@media (max-width:900px){.page{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="proto"><strong>Maquette de proposition</strong> — ce formulaire est une démonstration : aucune information n'est envoyée ni enregistrée.</div>
+
+<div class="urg">
+  <div class="wrap">
+    <span>Urgences adultes et enfants — ouvertes 24 h/24, 7 j/7</span>
+    <a href="tel:+2252720203838">27 20 20 38 38</a>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <span class="mk">GMP</span>
+      <span class="nm"><b>Polyclinique GMP</b><span>GROUPE MÉDICAL DU PLATEAU</span></span>
+    </a>
+    <a class="back" href="index.html">← Retour à l'accueil</a>
+  </div>
+</header>
+
+<main class="wrap page">
+  <div>
+    <div class="eyebrow">Rendez-vous</div>
+    <h1>Demander un rendez-vous</h1>
+    <p class="intro">Deux minutes suffisent. L'accueil de la polyclinique vous rappelle pour confirmer le jour et l'heure avec le spécialiste.</p>
+
+    <form id="rdv" novalidate>
+      <fieldset>
+        <legend>1 · Où souhaitez-vous consulter ?</legend>
+        <div class="choices" role="radiogroup" aria-label="Site">
+          <label class="choice"><input type="radio" name="site" value="plateau" checked/><span>GMP Plateau</span></label>
+          <label class="choice"><input type="radio" name="site" value="cocody"/><span>GMP Cocody</span></label>
+          <label class="choice"><input type="radio" name="site" value="irp"/><span>Institut de Radiologie</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>2 · Pour quelle spécialité ?</legend>
+        <label>Spécialité
+          <select name="specialite">
+            <option>Je ne sais pas — orientez-moi</option>
+            <option>Cardiologie</option>
+            <option>Gynécologie-obstétrique</option>
+            <option>Pédiatrie</option>
+            <option>Imagerie médicale (IRM, scanner, échographie)</option>
+            <option>Neurologie</option>
+            <option>Endocrinologie-diabétologie</option>
+            <option>Néphrologie</option>
+            <option>Rhumatologie</option>
+            <option>Dermatologie</option>
+            <option>Infectiologie</option>
+            <option>Chirurgie</option>
+            <option>Médecine générale</option>
+          </select>
+        </label>
+        <div class="grid2">
+          <label>Jours qui vous conviennent
+            <select name="jours"><option>Indifférent</option><option>En semaine</option><option>Samedi</option></select>
+          </label>
+          <label>Moment de la journée
+            <select name="moment"><option>Indifférent</option><option>Matin</option><option>Après-midi</option></select>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3 · Comment vous joindre ?</legend>
+        <div class="grid2">
+          <label>Nom et prénom<input type="text" name="nom" autocomplete="name"/></label>
+          <label>Téléphone (WhatsApp si possible)<input type="tel" name="tel" autocomplete="tel" placeholder="07 00 00 00 00"/></label>
+        </div>
+        <label>Précision (facultatif)
+          <textarea name="msg"></textarea>
+          <span class="hint">N'indiquez pas de détails médicaux ici : ils seront recueillis par le médecin, en consultation.</span>
+        </label>
+        <label class="consent"><input type="checkbox" name="ok"/>J'accepte que la polyclinique me rappelle au numéro indiqué pour organiser ce rendez-vous.</label>
+      </fieldset>
+
+      <button class="btn" type="submit">Envoyer ma demande</button>
+      <div class="note" id="note" role="status">Démonstration : dans la version en ligne, votre demande arrive directement à l'accueil de la polyclinique, qui vous rappelle. Rien n'a été envoyé.</div>
+    </form>
+  </div>
+
+  <aside>
+    <div class="box u">
+      <h2>Une urgence ?</h2>
+      <p>N'utilisez pas ce formulaire. Appelez ou venez directement : les urgences sont ouvertes en continu.</p>
+      <a class="tel" href="tel:+2252720203838">27 20 20 38 38</a>
+    </div>
+    <div class="box">
+      <h2>Ce qui se passe ensuite</h2>
+      <ol>
+        <li>L'accueil reçoit votre demande.</li>
+        <li>Il vous rappelle pour proposer un créneau.</li>
+        <li>Vous recevez une confirmation par SMS ou WhatsApp.</li>
+      </ol>
+    </div>
+    <div class="box">
+      <h2>À apporter le jour J</h2>
+      <p>Pièce d'identité, carte d'assurance ou de mutuelle, ordonnances et examens antérieurs.</p>
+    </div>
+  </aside>
+</main>
+
+<script>
+document.getElementById('rdv').addEventListener('submit', function (e) {
+  e.preventDefault();
+  document.getElementById('note').classList.add('on');
+});
+</script>
+</body>
+</html>

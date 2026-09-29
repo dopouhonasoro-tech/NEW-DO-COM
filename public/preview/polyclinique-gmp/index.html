@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Polyclinique GMP — Groupe Médical du Plateau</title>
+<meta name="description" content="Maquette de proposition réalisée par DO COM pour la Polyclinique GMP — document de travail, sans engagement."/>
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+<meta name="theme-color" content="#123A4A"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --encre:#0E1B24;
+  --marine:#123A4A;
+  --lagune:#1F7A8C;
+  --lagune-f:#16606E;
+  --ecume:#E7F0F1;
+  --brume:#F2F6F6;
+  --papier:#FBFBF8;
+  --pierre:#56636B;
+  --trait:#D9E2E4;
+  --urgence:#B8322A;
+  --urgence-f:#FBEAE8;
+
+  --disp:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+
+  --max:1200px;
+  --r:6px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--papier);color:var(--encre);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--disp);font-weight:500;letter-spacing:-.01em;text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lagune-f)}
+:focus-visible{outline:2px solid var(--lagune);outline-offset:3px}
+
+/* Bandeau maquette */
+.proto{background:var(--encre);color:#C9D6DA;font-size:.78rem;text-align:center;padding:7px 16px;font-family:var(--mono)}
+.proto strong{color:#fff;font-weight:500}
+
+/* Barre urgences */
+.urg{background:var(--urgence);color:#fff}
+.urg .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:9px;padding-bottom:9px;font-size:.88rem;flex-wrap:wrap}
+.urg a{font-family:var(--mono);font-weight:500;text-decoration:none;white-space:nowrap}
+.urg .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#fff;margin-right:8px;vertical-align:1px}
+
+/* Header */
+header.site{background:var(--papier);border-bottom:1px solid var(--trait);position:sticky;top:0;z-index:20}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:74px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo .mk{width:48px;height:44px;flex:none;border-radius:8px;background:var(--marine);color:#fff;display:grid;place-items:center;font-family:var(--sans);font-size:.86rem;font-weight:600;letter-spacing:.06em}
+.logo .nm{line-height:1.1}
+.logo .nm b{display:block;font-family:var(--disp);font-weight:600;font-size:1.18rem}
+.logo .nm span{font-size:.72rem;color:var(--pierre);letter-spacing:.04em}
+nav.main{display:flex;gap:22px;font-size:.9rem}
+nav.main a{white-space:nowrap}
+nav.main a{text-decoration:none;color:var(--encre)}
+nav.main a:hover{color:var(--lagune-f)}
+.hd-r{display:flex;align-items:center;gap:16px}
+.lang{font-family:var(--mono);font-size:.78rem;color:var(--pierre)}
+.lang b{color:var(--encre);font-weight:500}
+
+.btn{white-space:nowrap;display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:var(--r);font-weight:500;font-size:.94rem;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--sans)}
+.btn-p{background:var(--marine);color:#fff}
+.btn-p:hover{background:var(--encre)}
+.btn-o{border-color:var(--marine);color:var(--marine);background:transparent}
+.btn-o:hover{background:var(--ecume)}
+.btn-u{background:var(--urgence);color:#fff}
+@media (max-width:1180px){nav.main{display:none}}
+@media (max-width:760px){.lang{display:none}.logo .nm span{display:none}.hd-r .btn{padding:10px 14px;font-size:.86rem}}
+
+/* Hero */
+.hero{background:linear-gradient(180deg,var(--papier) 0%,var(--brume) 100%);border-bottom:1px solid var(--trait)}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:56px;padding-top:72px;padding-bottom:72px;align-items:center}
+.hero h1{font-size:clamp(2.3rem,4.6vw,3.7rem);line-height:1.06;margin:14px 0 20px}
+.hero h1 em{font-style:italic;color:var(--lagune-f)}
+.hero p.lead{font-size:1.1rem;color:var(--pierre);max-width:52ch;margin:0 0 30px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.facts{background:#fff;border:1px solid var(--trait);border-radius:10px;padding:8px 26px;box-shadow:0 18px 40px -24px rgba(18,58,74,.35)}
+.facts .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--trait)}
+.facts .row:last-child{border-bottom:0}
+.facts .k{font-size:.9rem;color:var(--pierre)}
+.facts .v{font-family:var(--disp);font-size:1.5rem;font-weight:500;color:var(--marine);text-align:right}
+.facts .v small{display:block;font-family:var(--sans);font-size:.72rem;color:var(--pierre);font-weight:400}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:40px;padding-top:48px;padding-bottom:48px}}
+
+/* Orientation */
+section{padding:88px 0}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.sec-h h2{font-size:clamp(1.8rem,3vw,2.5rem);margin-top:10px}
+.sec-h p{color:var(--pierre);max-width:46ch;margin:0}
+.paths{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.path{display:flex;flex-direction:column;gap:10px;padding:24px;border:1px solid var(--trait);border-radius:10px;background:#fff;text-decoration:none;transition:border-color .2s,transform .2s}
+.path:hover{border-color:var(--lagune);transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){.path{transition:none}.path:hover{transform:none}}
+.path .ic{width:40px;height:40px;border-radius:8px;background:var(--ecume);color:var(--lagune-f);display:grid;place-items:center}
+.path.u .ic{background:var(--urgence-f);color:var(--urgence)}
+.path h3{font-family:var(--sans);font-size:1.02rem;font-weight:600}
+.path p{margin:0;font-size:.9rem;color:var(--pierre)}
+.path .go{margin-top:auto;font-size:.85rem;color:var(--lagune-f);font-weight:500}
+.path.u .go{color:var(--urgence)}
+@media (max-width:980px){.paths{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.paths{grid-template-columns:1fr}}
+
+/* Spécialités */
+.spec-sec{background:#fff;border-top:1px solid var(--trait);border-bottom:1px solid var(--trait)}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--trait);border-left:1px solid var(--trait)}
+.spec{padding:20px 22px;border-right:1px solid var(--trait);border-bottom:1px solid var(--trait);display:flex;justify-content:space-between;align-items:center;gap:12px;text-decoration:none;font-size:.96rem}
+.spec:hover{background:var(--brume)}
+.spec span.ar{color:var(--lagune);font-family:var(--mono)}
+@media (max-width:980px){.specs{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.specs{grid-template-columns:1fr}}
+.spec-foot{margin-top:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--pierre);font-size:.92rem}
+
+/* Plateau technique */
+.tech{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tcard{padding:28px;border-radius:10px;background:var(--marine);color:#E4EEF0}
+.tcard:nth-child(2),.tcard:nth-child(6){background:var(--lagune-f)}
+.tcard h3{color:#fff;font-size:1.4rem;margin-bottom:8px}
+.tcard p{margin:0;font-size:.92rem;color:#C8DBDF}
+@media (max-width:900px){.tech{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.tech{grid-template-columns:1fr}}
+
+/* Sites */
+.sites-sec{background:var(--brume);border-top:1px solid var(--trait);border-bottom:1px solid var(--trait)}
+.sites{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.site-c{background:#fff;border:1px solid var(--trait);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.site-c .map{height:128px;background:
+  radial-gradient(circle at 62% 48%,var(--urgence) 0 6px,transparent 7px),
+  radial-gradient(circle at 62% 48%,rgba(184,50,42,.18) 0 22px,transparent 23px),
+  repeating-linear-gradient(90deg,transparent 0 38px,rgba(18,58,74,.07) 38px 39px),
+  repeating-linear-gradient(0deg,transparent 0 38px,rgba(18,58,74,.07) 38px 39px),
+  var(--ecume)}
+.site-c .map.b{background:
+  radial-gradient(circle at 38% 40%,var(--marine) 0 6px,transparent 7px),
+  radial-gradient(circle at 38% 40%,rgba(18,58,74,.16) 0 22px,transparent 23px),
+  repeating-linear-gradient(90deg,transparent 0 38px,rgba(18,58,74,.07) 38px 39px),
+  repeating-linear-gradient(0deg,transparent 0 38px,rgba(18,58,74,.07) 38px 39px),
+  var(--ecume)}
+.site-c .map.c{background:
+  radial-gradient(circle at 50% 60%,var(--lagune) 0 6px,transparent 7px),
+  radial-gradient(circle at 50% 60%,rgba(31,122,140,.18) 0 22px,transparent 23px),
+  repeating-linear-gradient(90deg,transparent 0 38px,rgba(18,58,74,.07) 38px 39px),
+  repeating-linear-gradient(0deg,transparent 0 38px,rgba(18,58,74,.07) 38px 39px),
+  var(--ecume)}
+.site-c .bd{padding:22px 24px 24px;display:flex;flex-direction:column;gap:8px;flex:1}
+.site-c h3{font-size:1.3rem}
+.site-c .tag{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--pierre)}
+.site-c p{margin:0;font-size:.92rem;color:var(--pierre)}
+.site-c .ln{margin-top:auto;padding-top:12px;font-size:.88rem;color:var(--lagune-f);font-weight:500;text-decoration:none}
+@media (max-width:900px){.sites{grid-template-columns:1fr}}
+
+/* International — bilingue */
+.intl{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.intl .en{font-family:var(--mono);font-size:.72rem;background:var(--marine);color:#fff;padding:3px 8px;border-radius:4px;letter-spacing:.06em}
+.intl h2{font-size:clamp(1.8rem,3vw,2.4rem);margin:14px 0 16px}
+.intl p{color:var(--pierre);max-width:48ch}
+.intl ul{list-style:none;padding:0;margin:0;border-top:1px solid var(--trait)}
+.intl li{padding:16px 0;border-bottom:1px solid var(--trait);display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:.95rem}
+.intl li b{display:block;font-weight:600}
+.intl li span{color:var(--pierre);font-size:.9rem}
+.intl .n{font-family:var(--mono);color:var(--lagune-f);font-size:.85rem;padding-top:2px}
+@media (max-width:900px){.intl{grid-template-columns:1fr;gap:32px}}
+
+/* Préparer sa venue */
+.prep-sec{background:#fff;border-top:1px solid var(--trait)}
+.prep{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.prep h3{font-family:var(--sans);font-size:1rem;font-weight:600;margin-bottom:10px;padding-top:14px;border-top:2px solid var(--marine)}
+.prep p{margin:0;font-size:.92rem;color:var(--pierre)}
+.prep .todo{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:.7rem;color:#8A5A00;background:#FFF4DB;padding:2px 7px;border-radius:4px}
+@media (max-width:900px){.prep{grid-template-columns:1fr;gap:28px}}
+
+/* Infos santé */
+.arts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.art{border:1px solid var(--trait);border-radius:10px;padding:26px;background:#fff;display:flex;flex-direction:column;gap:10px}
+.art .cat{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--lagune-f)}
+.art h3{font-size:1.25rem;line-height:1.25}
+.art p{margin:0;font-size:.9rem;color:var(--pierre)}
+.art .meta{margin-top:auto;font-size:.8rem;color:var(--pierre);padding-top:8px;border-top:1px solid var(--trait)}
+@media (max-width:900px){.arts{grid-template-columns:1fr}}
+
+/* RDV band */
+.rdv{background:var(--marine);color:#fff;padding:72px 0}
+.rdv .wrap{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.rdv h2{font-size:clamp(1.8rem,3vw,2.5rem);max-width:20ch}
+.rdv p{color:#BFD3D8;margin:10px 0 0;max-width:48ch}
+.rdv .btn-p{background:#fff;color:var(--marine)}
+.rdv .btn-p:hover{background:var(--ecume)}
+
+/* Footer */
+footer{background:var(--encre);color:#A9B8BE;padding:64px 0 32px;font-size:.9rem}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+footer h4{color:#fff;font-family:var(--sans);font-weight:600;font-size:.9rem;margin:0 0 12px}
+footer a{text-decoration:none;display:block;margin-bottom:6px}
+footer a:hover{color:#fff}
+footer .tel{font-family:var(--mono);color:#fff;font-size:1.05rem}
+footer .legal{margin-top:48px;padding-top:20px;border-top:1px solid #22323C;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem}
+@media (max-width:900px){footer .cols{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){footer .cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="proto"><strong>Maquette de proposition</strong> — réalisée par DO COM · Transformation digitale pour la Polyclinique GMP. Contenus, coordonnées et photos à valider avec la clinique.</div>
+
+<div class="urg">
+  <div class="wrap">
+    <span><span class="dot" aria-hidden="true"></span>Urgences adultes et enfants — ouvertes 24 h/24, 7 j/7</span>
+    <a href="tel:+2252720203838">27 20 20 38 38</a>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <span class="mk">GMP</span>
+      <span class="nm"><b>Polyclinique GMP</b><span>GROUPE MÉDICAL DU PLATEAU</span></span>
+    </a>
+    <nav class="main" aria-label="Navigation principale">
+      <a href="#specialites">Spécialités</a>
+      <a href="#plateau">Plateau technique</a>
+      <a href="#sites">Nos sites</a>
+      <a href="#international">Patients internationaux</a>
+      <a href="#venue">Préparer sa venue</a>
+    </nav>
+    <div class="hd-r">
+      <span class="lang"><b>FR</b> · EN</span>
+      <a class="btn btn-p" href="rendez-vous.html">Prendre rendez-vous</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Abidjan-Plateau · Avenue Lamblin</div>
+      <h1>Toute la médecine spécialisée, <em>sous un même toit</em>, au cœur du Plateau.</h1>
+      <p class="lead">Une trentaine de spécialités, un plateau d'imagerie complet, une maternité et un service d'urgences ouvert jour et nuit, pour les adultes comme pour les enfants.</p>
+      <div class="ctas">
+        <a class="btn btn-p" href="rendez-vous.html">Demander un rendez-vous</a>
+        <a class="btn btn-o" href="#specialites">Trouver une spécialité</a>
+      </div>
+    </div>
+    <aside class="facts" aria-label="La polyclinique en bref">
+      <div class="row"><span class="k">Spécialités médicales et chirurgicales</span><span class="v">≈ 30</span></div>
+      <div class="row"><span class="k">Imagerie</span><span class="v">IRM · 2 scanners</span></div>
+      <div class="row"><span class="k">Urgences adultes et enfants</span><span class="v">24 h/24<small>7 jours sur 7</small></span></div>
+      <div class="row"><span class="k">Sites à Abidjan</span><span class="v">Plateau · Cocody</span></div>
+    </aside>
+  </div>
+</section>
+
+<section aria-labelledby="orient-t">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><div class="eyebrow">Vous êtes</div><h2 id="orient-t">Que venez-vous chercher ?</h2></div>
+      <p>Quatre entrées pour trouver la bonne information en moins de dix secondes, depuis un téléphone.</p>
+    </div>
+    <div class="paths">
+      <a class="path u" href="tel:+2252720203838">
+        <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+        <h3>Une urgence</h3>
+        <p>Le service d'urgences accueille adultes et enfants, sans rendez-vous, à toute heure.</p>
+        <span class="go">Appeler le 27 20 20 38 38</span>
+      </a>
+      <a class="path" href="rendez-vous.html">
+        <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+        <h3>Une consultation</h3>
+        <p>Choisissez la spécialité et le site : l'accueil vous rappelle pour fixer l'heure.</p>
+        <span class="go">Demander un rendez-vous</span>
+      </a>
+      <a class="path" href="#plateau">
+        <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <h3>Un examen d'imagerie</h3>
+        <p>IRM, scanner, échographie : comment se préparer et quoi apporter.</p>
+        <span class="go">Voir l'imagerie</span>
+      </a>
+      <a class="path" href="#international">
+        <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></span>
+        <h3>Patient international</h3>
+        <p>Assureurs, entreprises, rapatriement : un interlocuteur, en français ou en anglais.</p>
+        <span class="go">International patients</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="spec-sec" id="specialites" aria-labelledby="spec-t">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><div class="eyebrow">Spécialités</div><h2 id="spec-t">Trouver le bon spécialiste</h2></div>
+      <p>Chaque spécialité a sa page : ce qui y est soigné, les médecins qui consultent, les jours et le site.</p>
+    </div>
+    <div class="specs">
+      <a class="spec" href="#">Cardiologie <span class="ar">→</span></a>
+      <a class="spec" href="#">Gynécologie-obstétrique <span class="ar">→</span></a>
+      <a class="spec" href="#">Pédiatrie et néonatologie <span class="ar">→</span></a>
+      <a class="spec" href="#">Imagerie médicale <span class="ar">→</span></a>
+      <a class="spec" href="#">Neurologie <span class="ar">→</span></a>
+      <a class="spec" href="#">Endocrinologie-diabétologie <span class="ar">→</span></a>
+      <a class="spec" href="#">Néphrologie <span class="ar">→</span></a>
+      <a class="spec" href="#">Rhumatologie <span class="ar">→</span></a>
+      <a class="spec" href="#">Dermatologie <span class="ar">→</span></a>
+      <a class="spec" href="#">Infectiologie <span class="ar">→</span></a>
+      <a class="spec" href="#">Chirurgie <span class="ar">→</span></a>
+      <a class="spec" href="#">Réanimation <span class="ar">→</span></a>
+    </div>
+    <div class="spec-foot">
+      <span>Et une vingtaine d'autres spécialités — la liste complète est établie avec la direction médicale.</span>
+      <a class="btn btn-o" href="#">Toutes les spécialités</a>
+    </div>
+  </div>
+</section>
+
+<section id="plateau" aria-labelledby="tech-t">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><div class="eyebrow">Plateau technique</div><h2 id="tech-t">Diagnostiquer et soigner sur place</h2></div>
+      <p>L'examen, l'avis du spécialiste et, si besoin, l'intervention se font dans le même établissement.</p>
+    </div>
+    <div class="tech">
+      <div class="tcard"><h3>Imagerie</h3><p>IRM, deux scanners, échographie, dont l'échographie interventionnelle.</p></div>
+      <div class="tcard"><h3>Blocs opératoires</h3><p>Chirurgie par vidéo, endoscopique et microchirurgie.</p></div>
+      <div class="tcard"><h3>Réanimation</h3><p>Surveillance continue des patients en situation critique.</p></div>
+      <div class="tcard"><h3>Maternité</h3><p>Suivi de grossesse, accouchement et néonatologie.</p></div>
+      <div class="tcard"><h3>Laboratoire</h3><p>Analyses biologiques réalisées sur place.</p></div>
+      <div class="tcard"><h3>Banque de sang</h3><p>Disponible pour les interventions et les urgences.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sites-sec" id="sites" aria-labelledby="sites-t">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><div class="eyebrow">Nos sites</div><h2 id="sites-t">Trois adresses à Abidjan</h2></div>
+      <p>Adresse, itinéraire, horaires et numéro direct de chaque site, au même endroit.</p>
+    </div>
+    <div class="sites">
+      <article class="site-c">
+        <div class="map" role="img" aria-label="Situation de la polyclinique au Plateau"></div>
+        <div class="bd">
+          <span class="tag">Site principal · urgences 24 h/24</span>
+          <h3>GMP Plateau</h3>
+          <p>Avenue Lamblin, entre l'ancienne CNPS et Versus Bank, Abidjan-Plateau.</p>
+          <a class="ln" href="#">Itinéraire →</a>
+        </div>
+      </article>
+      <article class="site-c">
+        <div class="map b" role="img" aria-label="Situation du centre de Cocody"></div>
+        <div class="bd">
+          <span class="tag">Centre de proximité</span>
+          <h3>GMP Cocody</h3>
+          <p>Cocody Saint-Jean, en face de la Cité Rouge.</p>
+          <a class="ln" href="#">Itinéraire →</a>
+        </div>
+      </article>
+      <article class="site-c">
+        <div class="map c" role="img" aria-label="Situation de l'Institut de Radiologie du Plateau"></div>
+        <div class="bd">
+          <span class="tag">Imagerie</span>
+          <h3>Institut de Radiologie du Plateau</h3>
+          <p>Avenue Delafosse, Abidjan-Plateau.</p>
+          <a class="ln" href="#">Itinéraire →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="international" aria-labelledby="intl-t" lang="en">
+  <div class="wrap intl">
+    <div>
+      <span class="en">EN · Version anglaise</span>
+      <h2 id="intl-t">International patients, insurers and companies</h2>
+      <p>Expatriates, travellers and international insurers can reach a dedicated contact who coordinates admission, cost estimates and, when needed, medical repatriation.</p>
+      <a class="btn btn-p" href="rendez-vous.html">Contact the international desk</a>
+    </div>
+    <ul>
+      <li><span class="n">01</span><div><b>Before admission</b><span>Cost estimate and guarantee of payment with your insurer.</span></div></li>
+      <li><span class="n">02</span><div><b>During the stay</b><span>A single contact for the patient, the family and the insurer.</span></div></li>
+      <li><span class="n">03</span><div><b>After discharge</b><span>Medical report in English and coordination of repatriation.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="prep-sec" id="venue" aria-labelledby="prep-t">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><div class="eyebrow">Préparer sa venue</div><h2 id="prep-t">Ce qu'il faut savoir avant de venir</h2></div>
+    </div>
+    <div class="prep">
+      <div><h3>Les documents à apporter</h3><p>Pièce d'identité, carte d'assurance ou de mutuelle, ordonnances et examens antérieurs.</p></div>
+      <div><h3>Assurances et prises en charge</h3><p>La liste des assurances et mutuelles avec lesquelles la polyclinique travaille, à jour.</p><span class="todo">Liste à fournir par la clinique</span></div>
+      <div><h3>Horaires des consultations</h3><p>Jours et heures de chaque spécialité, sur chaque site. Les urgences restent ouvertes en continu.</p><span class="todo">À compléter avec l'accueil</span></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="art-t">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><div class="eyebrow">Informations santé</div><h2 id="art-t">Comprendre avant de consulter</h2></div>
+      <p>Des articles de prévention rédigés avec les médecins de la polyclinique — pour informer, jamais pour promettre.</p>
+    </div>
+    <div class="arts">
+      <article class="art"><span class="cat">Endocrinologie</span><h3>Diabète : les signes qui doivent amener à consulter</h3><p>Soif inhabituelle, fatigue, amaigrissement : ce qui justifie un bilan.</p><span class="meta">Relu par un médecin de la polyclinique</span></article>
+      <article class="art"><span class="cat">Maternité</span><h3>Grossesse : le calendrier des examens, mois par mois</h3><p>Échographies, bilans sanguins : à quel moment et pourquoi.</p><span class="meta">Relu par un médecin de la polyclinique</span></article>
+      <article class="art"><span class="cat">Imagerie</span><h3>IRM ou scanner : comment se préparer à l'examen</h3><p>À jeun ou non, objets métalliques, durée : les réponses pratiques.</p><span class="meta">Relu par un médecin de la polyclinique</span></article>
+    </div>
+  </div>
+</section>
+
+<section class="rdv">
+  <div class="wrap">
+    <div>
+      <h2>Demander un rendez-vous, sans attendre au téléphone</h2>
+      <p>Indiquez la spécialité et vos disponibilités : l'accueil vous rappelle pour confirmer.</p>
+    </div>
+    <a class="btn btn-p" href="rendez-vous.html">Faire une demande</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>Polyclinique GMP</h4>
+        <p style="margin:0 0 14px">Groupe Médical du Plateau<br/>Avenue Lamblin, Abidjan-Plateau<br/>01 BP 551 Abidjan 01</p>
+        <span class="tel">27 20 20 38 38</span>
+      </div>
+      <div><h4>Soins</h4><a href="#specialites">Spécialités</a><a href="#plateau">Plateau technique</a><a href="#">Urgences</a><a href="#">Maternité</a></div>
+      <div><h4>Patients</h4><a href="rendez-vous.html">Rendez-vous</a><a href="#venue">Préparer sa venue</a><a href="#international">International patients</a><a href="#">Informations santé</a></div>
+      <div><h4>La polyclinique</h4><a href="#sites">Nos sites</a><a href="#">Recrutement</a><a href="#">Contact</a></div>
+    </div>
+    <div class="legal">
+      <span>Les informations de santé publiées sur ce site sont d'ordre général et ne remplacent pas une consultation.</span>
+      <span>Maquette DO COM · Transformation digitale</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
